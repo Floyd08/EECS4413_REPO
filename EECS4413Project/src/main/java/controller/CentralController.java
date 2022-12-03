@@ -18,7 +18,12 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 		//Event handler has other prototypes, so if this one isn't right you can totally change it
 		//More here: https://docs.aws.amazon.com/lambda/latest/dg/java-handler.html
 		
-		return null;	//Just a place holder
+		String response = "";
+		int statusCode = 200;
+		
+		response = "{'statusCode': " + statusCode + 
+				"'body': 'Hello from CentralController!'"; 
+		
+		return response;	//Just a place holder
 	}
-
 }
