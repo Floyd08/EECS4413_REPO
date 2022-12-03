@@ -146,6 +146,12 @@ public class User implements Comparable<User> {
 		return gS.toJson(this);
 	}
 	
+	public static User fromJSON(String Json) {
+		
+		Gson gS = new Gson();
+		return gS.fromJson(Json, User.class);
+	}
+	
 	@Override
 	public String toString() {
 		

@@ -103,6 +103,12 @@ public class ItemP implements Comparable<ItemP> {
 		return gS.toJson(this);
 	}
 	
+	public static ItemP fromJSON(String Json) {
+		
+		Gson gS = new Gson();
+		return gS.fromJson(Json, ItemP.class);
+	}
+	
 	@Override
 	public String toString() {
 		
