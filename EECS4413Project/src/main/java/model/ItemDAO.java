@@ -154,12 +154,6 @@ public class ItemDAO {
 			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
-	}
-	
-	public ItemP fromJSON(String Json) {
-		
-		Gson gS = new Gson();
-		return gS.fromJson(Json, ItemP.class);
 	}	
 }
 

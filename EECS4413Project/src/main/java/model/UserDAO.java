@@ -119,10 +119,4 @@ public class UserDAO {
 		else
 			throw new NoPasswordMatchException("Old password is invalid");		
 	}
-	
-	public User fromJSON(String Json) {
-		
-		Gson gS = new Gson();
-		return gS.fromJson(Json, User.class);
-	}
 }
