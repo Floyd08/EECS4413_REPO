@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
@@ -33,13 +34,13 @@ public class DAOTest {
 
 	public static void main(String[] args) {
 	    		
-		testItemDAO();
+		//testItemDAO();
 		//testUserDAO();
 		
 		//listMyTables();
 		//System.out.println();
-		//listItems("items");
-		//listItems("users");
+		listItems("items");
+		listItems("users");
 		
 	}
 	
@@ -49,6 +50,8 @@ public class DAOTest {
 		
 		ItemP i1 = new ItemP("a006", "coffee", "brown liquid", "food", "pilot", 14, 19.99);
 		ItemP i2 = new ItemP("b003", "book", "paper and words", "book", "BookCo", 3, 49.99);
+		ItemP i5 = new ItemP("a016", "cheese", "femented milk", "food", "balderson", 7, 12.99);
+		ItemP i6 = new ItemP("c005", "towel", "real big cloth, yo", "houseware", "towelCo", 4, 26.49);
 		
 		//String jTest = i1.toJSON();
 		//ItemP i4 = iS.fromJSON(jTest);
@@ -57,12 +60,17 @@ public class DAOTest {
 		try {
 			//iS.insert(i1);
 			//iS.insert(i2);
+			//iS.insert(i5);
+			//iS.insert(i6);
 			//iS.delete("a006");
 			//iS.updateQuantity("b003", 8);
 			//ItemP i3 = iS.retrieve("a006");
 			//System.out.println("i3: " + i3.toString());
 			//String i3 = iS.retrieveAsJSON("a006");
 			//System.out.println(i3);
+			//ArrayList<ItemP> allItems = new ArrayList<ItemP>();
+			//allItems = iS.retrieveAll();
+			//System.out.println(allItems.toString());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
