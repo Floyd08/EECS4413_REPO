@@ -13,17 +13,63 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 	//it will be necessary to pass a reference to dataModel
 	Model dataModel = Model.getInstance();
 	
+	private static CentralController instance;
+	
+	private CentralController() {
+	}
+	
+	public static CentralController getInstance() {
+		
+		if (instance == null) {
+			
+			instance = new CentralController();
+		}
+		
+		return instance;
+	}
+	
 	@Override
 	public String handleRequest(Map<String, String> event, Context context) {
 		//Event handler has other prototypes, so if this one isn't right you can totally change it
 		//More here: https://docs.aws.amazon.com/lambda/latest/dg/java-handler.html
 		
-		String response = "";
-		int statusCode = 200;
+		String eventBody = event.get("body");
+		String callResponse = "";
+	
+		if (event.get("Service").equals("Catalog")) {
+			
+			callResponse = toCatalog(eventBody);	
+		}
 		
-		response = "{'statusCode': " + statusCode + 
-				"'body': 'Hello from CentralController!'"; 
+		else if (event.get("Service").equals("IdentityManager")) {
+			callResponse = toIdentityManager(eventBody);	
+		}
 		
-		return response;	//Just a place holder
+		else {
+			callResponse = "{'statusCode': " + 404 + ", " + 
+					"'body': 'Service not found.'}";
+		}
+		
+		return callResponse;	//Just a place holder
+	}
+	
+	public static String toCatalog(String eventBody) {
+		
+		// TODO: Implement call to Catalog
+		
+		String response = "{'statusCode': " + 200 + ", " + 
+				"'body': 'toCatalog succeeded'}"; 
+		
+		return response;
+	}
+
+	public static String toIdentityManager(String eventBody) {
+		
+		// TODO: Implement call to identityManager
+		
+		String response = "{'statusCode': " + 200 + ", " + 
+				"'body': 'toIdentityManager succeeded'}"; 
+		
+		return response;
 	}
 }
