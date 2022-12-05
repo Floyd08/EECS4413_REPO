@@ -37,7 +37,6 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 		else if (eventService.equals("IdentityManager")) {
 			callResponse = toIdentityManager(eventBody);	
 		}
-		
 		else {
 			callResponse = "{'statusCode': " + 404 + ", " + 
 					"'body': 'Error: Service not found.'}";

@@ -82,4 +82,16 @@ public class CentralControllerTest {
 		
 		return response;
 	}
+	
+	public static String testServiceMissing() {
+		
+		CentralController testCentralController = new CentralController();
+		
+		Map<String, String> input = new HashMap<String, String>();
+		Context testContext = new TestContext();
+		
+		String response = testCentralController.handleRequest(input, testContext);
+		
+		return response;
+	}
 }
