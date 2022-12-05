@@ -12,42 +12,35 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 	//CentralController will have the only access to the Model, so when a sub controller is called,
 	//it will be necessary to pass a reference to dataModel
 	Model dataModel = Model.getInstance();
-	
-	private static CentralController instance;
-	
-	private CentralController() {
+
+	public CentralController() {
 	}
-	
-	public static CentralController getInstance() {
-		
-		if (instance == null) {
-			
-			instance = new CentralController();
-		}
-		
-		return instance;
-	}
-	
+
 	@Override
 	public String handleRequest(Map<String, String> event, Context context) {
 		//Event handler has other prototypes, so if this one isn't right you can totally change it
 		//More here: https://docs.aws.amazon.com/lambda/latest/dg/java-handler.html
 		
+		String eventService = event.get("Service");
 		String eventBody = event.get("body");
 		String callResponse = "";
-	
-		if (event.get("Service").equals("Catalog")) {
+		
+		if (eventService == null) {
+			callResponse = "{'statusCode': " + 400 + ", " + 
+					"'body': 'Error: Service not specified.'}";
+		}
+		else if (eventService.equals("Catalog")) {
 			
 			callResponse = toCatalog(eventBody);	
 		}
 		
-		else if (event.get("Service").equals("IdentityManager")) {
+		else if (eventService.equals("IdentityManager")) {
 			callResponse = toIdentityManager(eventBody);	
 		}
 		
 		else {
 			callResponse = "{'statusCode': " + 404 + ", " + 
-					"'body': 'Service not found.'}";
+					"'body': 'Error: Service not found.'}";
 		}
 		
 		return callResponse;	//Just a place holder
