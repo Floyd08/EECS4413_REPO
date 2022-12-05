@@ -1,6 +1,14 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+
+import com.amazonaws.services.dynamodbv2.document.Index;
+
+import bean.ItemP;
+import bean.ShoppingCart;
+import bean.User;
 
 public class Model {
 	
@@ -8,6 +16,7 @@ public class Model {
 	public ItemDAO iDB;
 	public UserDAO uDB;
 	public ArrayList<String> loggedIn = new ArrayList<String>();
+	public HashMap<String, ShoppingCart> carts = new HashMap<String, ShoppingCart>();	//Maps user IDs to ShoppingCarts
 
 	private Model() {
 		
@@ -37,4 +46,13 @@ public class Model {
 		
 		return loggedIn.remove(ID);
 	}
-}  
+		
+} 
+
+
+
+
+
+
+
+
