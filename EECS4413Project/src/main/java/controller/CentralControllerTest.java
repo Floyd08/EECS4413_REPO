@@ -28,7 +28,7 @@ public class CentralControllerTest {
 	
 	public static String testToCatalog() {
 		
-		CentralController testCentralController = CentralController.getInstance();
+		CentralController testCentralController = new CentralController();
 		
 		Map<String, String> input = new HashMap<String, String>();
 		Context testContext = new TestContext();
@@ -42,7 +42,7 @@ public class CentralControllerTest {
 	
 	public static String testToIdentityManager() {
 		
-		CentralController testCentralController = CentralController.getInstance();
+		CentralController testCentralController = new CentralController();
 		
 		Map<String, String> input = new HashMap<String, String>();
 		Context testContext = new TestContext();
@@ -56,7 +56,7 @@ public class CentralControllerTest {
 	
 	public static String testServiceNotFound() {
 		
-		CentralController testCentralController = CentralController.getInstance();
+		CentralController testCentralController = new CentralController();
 		
 		Map<String, String> input = new HashMap<String, String>();
 		Context testContext = new TestContext();

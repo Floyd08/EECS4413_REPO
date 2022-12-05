@@ -13,19 +13,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 	//it will be necessary to pass a reference to dataModel
 	Model dataModel = Model.getInstance();
 	
-	private static CentralController instance;
-	
-	private CentralController() {
-	}
-	
-	public static CentralController getInstance() {
-		
-		if (instance == null) {
-			
-			instance = new CentralController();
-		}
-		
-		return instance;
+	public CentralController() {
 	}
 	
 	@Override
