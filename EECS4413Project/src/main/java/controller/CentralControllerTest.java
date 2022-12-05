@@ -16,6 +16,9 @@ public class CentralControllerTest {
 		
 		String result = "";
 		
+		result = testMissingService();
+		System.out.println(result);
+		
 		result = testToCatalog();
 		System.out.println(result);
 		
@@ -26,9 +29,21 @@ public class CentralControllerTest {
 		System.out.println(result);
 	}
 	
+	public static String testMissingService() {
+		
+		CentralController testCentralController = new CentralController();
+		
+		Map<String, String> input = new HashMap<String, String>();
+		Context testContext = new TestContext();
+		
+		String response = testCentralController.handleRequest(input, testContext);
+		
+		return response;
+	}
+	
 	public static String testToCatalog() {
 		
-		CentralController testCentralController = CentralController.getInstance();
+		CentralController testCentralController = new CentralController();
 		
 		Map<String, String> input = new HashMap<String, String>();
 		Context testContext = new TestContext();
@@ -42,7 +57,7 @@ public class CentralControllerTest {
 	
 	public static String testToIdentityManager() {
 		
-		CentralController testCentralController = CentralController.getInstance();
+		CentralController testCentralController = new CentralController();
 		
 		Map<String, String> input = new HashMap<String, String>();
 		Context testContext = new TestContext();
@@ -56,7 +71,7 @@ public class CentralControllerTest {
 	
 	public static String testServiceNotFound() {
 		
-		CentralController testCentralController = CentralController.getInstance();
+		CentralController testCentralController = new CentralController();
 		
 		Map<String, String> input = new HashMap<String, String>();
 		Context testContext = new TestContext();
