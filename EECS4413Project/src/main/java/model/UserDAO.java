@@ -1,9 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.client.builder.AwsClientBuilder;
@@ -13,8 +9,6 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.AttributeUpdate;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
-import com.amazonaws.services.dynamodbv2.document.ItemCollection;
-import com.amazonaws.services.dynamodbv2.document.ScanOutcome;
 import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.dynamodbv2.document.spec.UpdateItemSpec;
 import com.google.gson.Gson;
@@ -102,26 +96,6 @@ public class UserDAO {
 		return null;
 	}
 	
-	public ArrayList<User> retrieveAll() {
-		
-		ArrayList<User> list = new ArrayList<User>();
-		
-		try { 
-			ItemCollection<ScanOutcome> users = table.scan();
-			Iterator<Item> iterator = users.iterator();
-			while (iterator.hasNext()) {
-				list.add( User.fromJSON( iterator.next().toJSON() ) );
-			}
-			return list;
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e.getMessage());
-		}
-		
-		return null;
-	}
-	
 	public void updatePassword(String ID, String newPassword, String oldPassword) throws NoPasswordMatchException, ItemNotFoundException {
 		
 		User u = retrieve(ID);
@@ -144,19 +118,5 @@ public class UserDAO {
 		}
 		else
 			throw new NoPasswordMatchException("Old password is invalid");		
-	}
-	
-	public HashMap<String, String> extractNames() {
-		
-		HashMap<String, String> names = new HashMap<String, String>();
-		
-		Iterator<User> items = retrieveAll().iterator();
-		while (items.hasNext()) {
-			
-			User u = items.next();
-			names.put(u.getName(), u.getID());
-		}
-		
-		return names;
 	}
 }
