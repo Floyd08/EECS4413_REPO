@@ -4,8 +4,8 @@ public class modelTesting {
 
 	public static void main(String[] args) {
 		
-		//testItem();
-		testAddress();
+		testItem();
+		//testAddress();
 	}
 	
 	public static void testItem() {
