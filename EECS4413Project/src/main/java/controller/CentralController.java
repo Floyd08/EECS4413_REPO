@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import com.amazonaws.services.lambda.runtime.Context;
@@ -11,7 +12,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 	
 	//CentralController will have the only access to the Model, so when a sub controller is called,
 	//it will be necessary to pass a reference to dataModel
-	Model dataModel = Model.getInstance();
+	static Model dataModel = Model.getInstance();
 
 	public CentralController() {
 	}
@@ -22,7 +23,6 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 		//More here: https://docs.aws.amazon.com/lambda/latest/dg/java-handler.html
 		
 		String eventService = event.get("Service");
-		String eventBody = event.get("body");
 		String callResponse = "";
 		
 		if (eventService == null) {
@@ -31,11 +31,11 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 		}
 		else if (eventService.equals("Catalog")) {
 			
-			callResponse = toCatalog(eventBody);	
+			callResponse = toCatalog(event);	
 		}
 		
 		else if (eventService.equals("IdentityManager")) {
-			callResponse = toIdentityManager(eventBody);	
+			callResponse = toIdentityManager(event);	
 		}
 		
 		else {
@@ -46,17 +46,122 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 		return callResponse;	//Just a place holder
 	}
 	
-	public static String toCatalog(String eventBody) {
+	public static String toCatalog(Map<String, String> event) {
 		
-		// TODO: Implement call to Catalog
+		String eventMethod = event.get("Method");
+		String eventParameters = event.get("Parameters");
+		String response = "";
 		
-		String response = "{'statusCode': " + 200 + ", " + 
-				"'body': 'toCatalog succeeded'}"; 
+		if (eventMethod == null) {
+			response = "{'statusCode': " + 400 + ", " + 
+					"'body': 'Error: Method not specified.'}";
+		}
+		
+		else if (eventMethod == "viewAll") {
+			String catalogResponse = Catalog.viewAll(dataModel).toString();
+			response = "{'statusCode': " + 200 + ", " + 
+					"'body': '" + catalogResponse + "'";
+		}
+		
+		else if (eventMethod == "viewByType") {
+			if (eventParameters == null) {
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
+			}
+			else {
+				String catalogResponse = Catalog.viewByType(dataModel, eventParameters).toString();
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + catalogResponse + "'";
+			}
+		}
+		
+		else if (eventMethod == "viewByBrand") {
+			if (eventParameters == null) {
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
+			}
+			else {
+				String catalogResponse = Catalog.viewByBrand(dataModel, eventParameters).toString();
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + catalogResponse + "'";
+			}
+		}
+		
+		else if (eventMethod == "getNameMap") {
+			String catalogResponse = Catalog.getNameMap(dataModel).toString();
+			response = "{'statusCode': " + 200 + ", " + 
+					"'body': '" + catalogResponse + "'";
+		}
+		
+		else if (eventMethod == "getBrandList") {
+			String catalogResponse = Catalog.getBrandList(dataModel).toString();
+			response = "{'statusCode': " + 200 + ", " + 
+					"'body': '" + catalogResponse + "'";
+		}
+		
+		else if (eventMethod == "getTypeList") {
+			String catalogResponse = Catalog.getTypeList(dataModel).toString();
+			response = "{'statusCode': " + 200 + ", " + 
+					"'body': '" + catalogResponse + "'";
+		}
+		
+		else if (eventMethod == "add") {
+			if (eventParameters == null) {
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
+			}
+			else {
+				Catalog.add(dataModel, eventParameters);
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + eventParameters + " added.'";
+			}
+		}
+		
+		else if (eventMethod == "addMany") {
+			if (eventParameters == null) {
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
+			}
+			else {
+				// TODO
+//				Catalog.addMany(dataModel, itemsToAdd);
+//				response = "{'statusCode': " + 200 + ", " + 
+//						"'body': '" + eventParameters + " added.";
+			}
+		}
+		
+		else if (eventMethod == "get") {
+			if (eventParameters == null) {
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
+			}
+			else {
+				String catalogResponse = Catalog.get(dataModel, eventParameters);
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + catalogResponse + "'";
+			}
+		}
+		
+		else if (eventMethod == "remove") {
+			if (eventParameters == null) {
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
+			}
+			else {
+				Catalog.remove(dataModel, eventParameters);
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + eventParameters + " removed.'";
+			}
+		}
+		else {
+			response = "{'statusCode': " + 404 + ", " + 
+					"'body': 'Error: Method not found.'}"; 
+		}
 		
 		return response;
 	}
 
-	public static String toIdentityManager(String eventBody) {
+	public static String toIdentityManager(Map<String, String> event) {
 		
 		// TODO: Implement call to identityManager
 		
