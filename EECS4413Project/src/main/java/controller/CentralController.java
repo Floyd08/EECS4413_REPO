@@ -57,13 +57,13 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					"'body': 'Error: Method not specified.'}";
 		}
 		
-		else if (eventMethod == "viewAll") {
+		else if (eventMethod.equals("viewAll")) {
 			String catalogResponse = Catalog.viewAll(dataModel).toString();
 			response = "{'statusCode': " + 200 + ", " + 
 					"'body': '" + catalogResponse + "'";
 		}
 		
-		else if (eventMethod == "viewByType") {
+		else if (eventMethod.equals("viewByType")) {
 			if (eventParameters == null) {
 				response = "{'statusCode': " + 400 + ", " + 
 						"'body': 'Error: Parameters missing.'}";
@@ -75,7 +75,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 			}
 		}
 		
-		else if (eventMethod == "viewByBrand") {
+		else if (eventMethod.equals("viewByBrand")) {
 			if (eventParameters == null) {
 				response = "{'statusCode': " + 400 + ", " + 
 						"'body': 'Error: Parameters missing.'}";
@@ -87,25 +87,25 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 			}
 		}
 		
-		else if (eventMethod == "getNameMap") {
+		else if (eventMethod.equals("getNameMap")) {
 			String catalogResponse = Catalog.getNameMap(dataModel).toString();
 			response = "{'statusCode': " + 200 + ", " + 
 					"'body': '" + catalogResponse + "'";
 		}
 		
-		else if (eventMethod == "getBrandList") {
+		else if (eventMethod.equals("getBrandList")) {
 			String catalogResponse = Catalog.getBrandList(dataModel).toString();
 			response = "{'statusCode': " + 200 + ", " + 
 					"'body': '" + catalogResponse + "'";
 		}
 		
-		else if (eventMethod == "getTypeList") {
+		else if (eventMethod.equals("getTypeList")) {
 			String catalogResponse = Catalog.getTypeList(dataModel).toString();
 			response = "{'statusCode': " + 200 + ", " + 
 					"'body': '" + catalogResponse + "'";
 		}
 		
-		else if (eventMethod == "add") {
+		else if (eventMethod.equals("add")) {
 			if (eventParameters == null) {
 				response = "{'statusCode': " + 400 + ", " + 
 						"'body': 'Error: Parameters missing.'}";
@@ -117,7 +117,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 			}
 		}
 		
-		else if (eventMethod == "addMany") {
+		else if (eventMethod.equals("addMany")) {
 			if (eventParameters == null) {
 				response = "{'statusCode': " + 400 + ", " + 
 						"'body': 'Error: Parameters missing.'}";
@@ -130,7 +130,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 			}
 		}
 		
-		else if (eventMethod == "get") {
+		else if (eventMethod.equals("get")) {
 			if (eventParameters == null) {
 				response = "{'statusCode': " + 400 + ", " + 
 						"'body': 'Error: Parameters missing.'}";
@@ -142,7 +142,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 			}
 		}
 		
-		else if (eventMethod == "remove") {
+		else if (eventMethod.equals("remove")) {
 			if (eventParameters == null) {
 				response = "{'statusCode': " + 400 + ", " + 
 						"'body': 'Error: Parameters missing.'}";
