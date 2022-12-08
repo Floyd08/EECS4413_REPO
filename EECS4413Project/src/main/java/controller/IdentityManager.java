@@ -13,10 +13,11 @@ import model.Model;
 public final class IdentityManager{
 	
 	//Is called by CentralController for User LogIn, LogOut, registration and so forth
-	private Model dataModel = Model.getInstance();
 	
 	
-	public boolean userExists(String id){
+	
+	public static boolean userExists(String id){
+		Model dataModel = Model.getInstance();
 		User user = dataModel.uDB.retrieve(id);
 		boolean exist = true;
 		if (user == null) {
@@ -25,13 +26,14 @@ public final class IdentityManager{
 		return exist;
 	}
 	
-	public String logIn(String id, String pass) throws NoSuchAlgorithmException{
+	public static String logIn(String id, String pass) throws NoSuchAlgorithmException{
+		Model dataModel = Model.getInstance();
 		String res = "{\r\n"
 				+ "  \"status\": 200,\r\n"
 				+ "  \"message\": \"Log in successful\",\r\n";
 		if(!userExists(id)) {
 			res = "{\r\n"
-					+ "  \"status\": 200,\r\n"
+					+ "  \"status\": 400,\r\n"
 					+ "  \"message\": \"User does not exist\",\r\n";
 		}
 		
@@ -45,27 +47,29 @@ public final class IdentityManager{
 		return res;
 	}
 	
-	public String logOut(String id) {
+	public static String logOut(String id) {
+		Model dataModel = Model.getInstance();
 		String res = "{\r\n"
 				+ "  \"status\": 200,\r\n"
-				+ "  \"message\": \"Log in successful\",\r\n";
+				+ "  \"message\": \"Log out successful\",\r\n";
 		if(!userExists(id)) {
 			res = "{\r\n"
-					+ "  \"status\": 200,\r\n"
+					+ "  \"status\": 400,\r\n"
 					+ "  \"message\": \"User does not exist\",\r\n";
 		}
 		dataModel.makeInActive(id);
 		return res;
 	}
 	
-	public String register(String id, String nomi, String aile, String postal, String address, String pass) throws NoSuchAlgorithmException{
+	public static String register(String id, String nomi, String aile, String postal, String address, String pass) throws NoSuchAlgorithmException{
+		Model dataModel = Model.getInstance();
 		String res = "{\r\n"
 				+ "  \"status\": 200,\r\n"
-				+ "  \"message\": \"Log in successful\",\r\n";
-		if(!userExists(id)) {
+				+ "  \"message\": \"Register successful\",\r\n";
+		if(userExists(id)) {
 			res = "{\r\n"
-					+ "  \"status\": 200,\r\n"
-					+ "  \"message\": \"User does not exist\",\r\n";
+					+ "  \"status\": 400,\r\n"
+					+ "  \"message\": \"User already exists\",\r\n";
 		}else {
 			User user = new User(id, nomi, aile, postal, address, pass);
 			user.changePassword(user.hashPassword(pass), pass);
