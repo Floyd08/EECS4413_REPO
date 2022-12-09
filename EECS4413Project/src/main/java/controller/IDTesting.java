@@ -28,6 +28,10 @@ public class IDTesting {
 		res = IdentityManager.logOut("u035");
 		System.out.println(res);
 		System.out.println("is u035 in loggedIn? " + m.loggedIn.contains("u035"));
+		
+		res = IdentityManager.register("Jill", "Smoith", "A1A 1A1", "345 fake street", "password");
+		System.out.println(res);
+		System.out.println("Active users: " + m.loggedIn.toString());
 	}
 
 }

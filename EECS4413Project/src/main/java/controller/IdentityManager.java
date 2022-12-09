@@ -74,6 +74,16 @@ public final class IdentityManager{
 		return res;
 	}
 	
+	public static String register(String nomi, String aile, String postal, String address, String pass) {
+		
+		Model dataModel = Model.getInstance();
+		//public int userCount = uDB.getUserCount();				//for generating new userIDs
+		String  newID = "u" + (dataModel.uDB.getUserCount() + 1);
+		String res = register(String.valueOf(newID), nomi, aile, postal, address, pass);
+		
+		return res;
+	}
+	
 	public static String register(String id, String nomi, String aile, String postal, String address, String pass){
 		Model dataModel = Model.getInstance();
 		String res = "{\r\n"
