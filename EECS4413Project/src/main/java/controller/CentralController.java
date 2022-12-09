@@ -60,7 +60,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 		else if (eventMethod.equals("viewAll")) {
 			String catalogResponse = Catalog.viewAll(dataModel).toString();
 			response = "{'statusCode': " + 200 + ", " + 
-					"'body': '" + catalogResponse + "'";
+					"'body': '" + catalogResponse + "'}";
 		}
 		
 		else if (eventMethod.equals("viewByType")) {
@@ -71,7 +71,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 			else {
 				String catalogResponse = Catalog.viewByType(dataModel, eventParameters).toString();
 				response = "{'statusCode': " + 200 + ", " + 
-						"'body': '" + catalogResponse + "'";
+						"'body': '" + catalogResponse + "'}";
 			}
 		}
 		
@@ -83,26 +83,26 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 			else {
 				String catalogResponse = Catalog.viewByBrand(dataModel, eventParameters).toString();
 				response = "{'statusCode': " + 200 + ", " + 
-						"'body': '" + catalogResponse + "'";
+						"'body': '" + catalogResponse + "'}";
 			}
 		}
 		
 		else if (eventMethod.equals("getNameMap")) {
 			String catalogResponse = Catalog.getNameMap(dataModel).toString();
 			response = "{'statusCode': " + 200 + ", " + 
-					"'body': '" + catalogResponse + "'";
+					"'body': '" + catalogResponse + "'}";
 		}
 		
 		else if (eventMethod.equals("getBrandList")) {
 			String catalogResponse = Catalog.getBrandList(dataModel).toString();
 			response = "{'statusCode': " + 200 + ", " + 
-					"'body': '" + catalogResponse + "'";
+					"'body': '" + catalogResponse + "'}";
 		}
 		
 		else if (eventMethod.equals("getTypeList")) {
 			String catalogResponse = Catalog.getTypeList(dataModel).toString();
 			response = "{'statusCode': " + 200 + ", " + 
-					"'body': '" + catalogResponse + "'";
+					"'body': '" + catalogResponse + "'}";
 		}
 		
 		else if (eventMethod.equals("add")) {
@@ -113,7 +113,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 			else {
 				Catalog.add(dataModel, eventParameters);
 				response = "{'statusCode': " + 200 + ", " + 
-						"'body': '" + eventParameters + " added.'";
+						"'body': '" + eventParameters + " added.'}";
 			}
 		}
 		
@@ -138,7 +138,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 			else {
 				String catalogResponse = Catalog.get(dataModel, eventParameters);
 				response = "{'statusCode': " + 200 + ", " + 
-						"'body': '" + catalogResponse + "'";
+						"'body': '" + catalogResponse + "'}";
 			}
 		}
 		
@@ -150,7 +150,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 			else {
 				Catalog.remove(dataModel, eventParameters);
 				response = "{'statusCode': " + 200 + ", " + 
-						"'body': '" + eventParameters + " removed.'";
+						"'body': '" + eventParameters + " removed.'}";
 			}
 		}
 		else {
