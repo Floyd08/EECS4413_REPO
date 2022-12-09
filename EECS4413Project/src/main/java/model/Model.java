@@ -15,6 +15,7 @@ public class Model {
 	private static Model instance;
 	public ItemDAO iDB;
 	public UserDAO uDB;
+	public ReviewDAO rDB;
 	public ArrayList<String> loggedIn = new ArrayList<String>();
 	public HashMap<String, ShoppingCart> carts = new HashMap<String, ShoppingCart>();	//Maps user IDs to ShoppingCarts
 
@@ -22,6 +23,7 @@ public class Model {
 		
 		iDB = new ItemDAO();
 		uDB = new UserDAO();
+		rDB = new ReviewDAO();
 	}
 	
 	public static Model getInstance() {

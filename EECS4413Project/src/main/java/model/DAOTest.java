@@ -36,17 +36,21 @@ public class DAOTest {
 	    		
 		//testItemDAO();
 		//testUserDAO();
+		testReviews();
+		//testCat();
 		
 		//listMyTables();
 		//System.out.println();
-		listItems("items");
-		listItems("users");
+		//listItems("items");
+		//listItems("users");
+		listItems("reviews");
 		
 	}
 	
 	public static void testItemDAO() {
 		
 		ItemDAO iS = new ItemDAO();
+		ArrayList<String> list = new ArrayList<String>();
 		
 		ItemP i1 = new ItemP("a006", "coffee", "brown liquid", "food", "pilot", 14, 19.99);
 		ItemP i2 = new ItemP("b003", "book", "paper and words", "book", "BookCo", 3, 49.99);
@@ -58,19 +62,27 @@ public class DAOTest {
 		//System.out.println(i4.toString());
 		
 		try {
-			//iS.insert(i1);
-			//iS.insert(i2);
-			//iS.insert(i5);
-			//iS.insert(i6);
-			//iS.delete("a006");
-			//iS.updateQuantity("b003", 8);
-			//ItemP i3 = iS.retrieve("a006");
-			//System.out.println("i3: " + i3.toString());
-			//String i3 = iS.retrieveAsJSON("a006");
-			//System.out.println(i3);
-			//ArrayList<ItemP> allItems = new ArrayList<ItemP>();
-			//allItems = iS.retrieveAll();
-			//System.out.println(allItems.toString());
+			iS.insert(i1);
+			iS.insert(i2);
+			iS.insert(i5);
+			iS.insert(i6);
+//			iS.delete("a006");
+//			iS.updateQuantity("b003", 8);
+//			ItemP i3 = iS.retrieve("a006");
+//			System.out.println("i3: " + i3.toString());
+//			String i3 = iS.retrieveAsJSON("a006");
+//			System.out.println(i3);
+//			ArrayList<ItemP> allItems = new ArrayList<ItemP>();
+//			allItems = iS.retrieveAll();
+//			System.out.println(allItems.toString());
+//			list = iS.retrieveByType("food");
+//			list = iS.retrieveByBrand("BookCo");
+//			list = iS.getTypes();
+//			list = iS.getBrands();
+//			System.out.println(list.toString());
+//			iS.delete("a047");
+//			iS.insertFromJSON("{\"quantity\":\"24\",\"price\":\"5.49\",\"name\":\"eggs\",\"description\":\"Protein Capsule\",\"ID\":\"a047\",\"type\":\"food\",\"brand\":\"burnbrae\"}");
+			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -92,6 +104,27 @@ public class DAOTest {
 			//uS.updatePassword("u004", "notpassword", "password");
 			String u3 = uS.retrieveAsJSON("u004");
 			System.out.println(u3);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("\n\n" + e.getMessage());
+		}
+	}
+	
+	public static void testReviews() {
+		
+		ReviewDAO rS = new ReviewDAO();
+		ArrayList<String> list = new ArrayList<String>();
+		
+		try {
+			rS.insertReview("a006", "u004", "John", "Smith", "I like the way coffee tastes, because it tastes like coffee, which is nice");
+			rS.insertReview("a016", "u004", "John", "Smith", "mmmmmm, cheeeese");
+			//rS.deleteReview("a006", "u004");
+			//String r1 = rS.getReview("a006", "u004");
+			//System.out.println(r1);
+			//rS.editComment("a006", "u004", "Boooo coffee, booo");
+			list = rS.getAllofItem("a006");
+			System.out.println(list.toString());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
