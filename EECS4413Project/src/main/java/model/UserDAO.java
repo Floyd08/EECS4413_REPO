@@ -164,4 +164,25 @@ public class UserDAO {
 		
 		return names;
 	}
+	
+	public int getUserCount() {
+		
+		try {
+			Item item = table.getItem("ID", "u000");
+			int count = item.getInt("userCount");
+			
+			AttributeUpdate au = new AttributeUpdate("userCount").put(count + 1);
+			UpdateItemSpec update = new UpdateItemSpec().withPrimaryKey("ID", "u000");
+			update.addAttributeUpdate(au);
+			table.updateItem(update);
+			
+			return count;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		return -1;
+	}
 }
