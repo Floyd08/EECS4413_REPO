@@ -19,14 +19,15 @@ public class CatalogTesting {
 		//Catalog.add(m, "{\"quantity\":\"24\",\"price\":\"5.49\",\"name\":\"eggs\",\"description\":\"Protein Capsule\",\"ID\":\"a047\",\"type\":\"food\",\"brand\":\"burnbrae\"}");
 		//list = Catalog.viewAll(m);
 		//list = Catalog.viewByBrand(m, "BookCo");
-		list = Catalog.viewByType(m, "food");
+		//list = Catalog.viewByType(m, "food");
 		//list = Catalog.getBrandList(m);
 		//list = Catalog.getTypeList(m);
 		//names = Catalog.getNameMap(m);
-		System.out.println(list);
+		//System.out.println(list);
 		//System.out.println(names);
 		
-		ShoppingCartTesting();
+		//ShoppingCartTesting();
+		ReviewTesting();
 		
 	}
 	
@@ -57,6 +58,30 @@ public class CatalogTesting {
 		System.out.println(c.toString());
 		c.AddToCart(i3);
 		System.out.println(c.toString());
+		
+		System.out.println(c.cartToJSON());
+	}
+	
+	public static void ReviewTesting() {
+		
+		Model m = Model.getInstance();
+		ArrayList<String> list;
+		
+		try {
+			Catalog.addReview(m, "a006", "u004", "John", "Smith", "I like the way coffee tastes, because it tastes like coffee, which is nice");
+			Catalog.addReview(m, "a016", "u004", "John", "Smith", "mmmmmm, cheeeese");
+			//Catalog.deleteReview(m, "a006", "u004");
+			//String r1 = Catalog.getReview(m, "a016", "u004");
+			//System.out.println(r1);
+			//rS.editComment("a006", "u004", "Boooo coffee, booo");
+			list = Catalog.getAllReviewsForItem(m, "a006");
+			System.out.println(list.toString());
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("\n\n" + e.getMessage());
+		}
 	}
 
 	

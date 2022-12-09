@@ -42,6 +42,32 @@ public class Catalog {
 		
 		return m.iDB.getTypes();
 	}
+	
+	public static void addReview(Model m, String itemID, String userID, String name, String surName, String comment) {
+		
+		m.rDB.insertReview(itemID, userID, name, surName, comment);
+	}
+	
+	public static void deleteReview(Model m, String itemID, String userID) {
+		
+		m.rDB.deleteReview(itemID, userID);
+	}
+	
+	public static String getReview(Model m, String itemID, String userID) {
+		
+		return m.rDB.getReview(itemID, userID);
+	}
+	
+	public static ArrayList<String> getAllReviewsForItem(Model m, String itemID) {
+		
+		return m.rDB.getAllofItem(itemID);
+	}
+	
+	public static void editComment(Model m, String itemID, String userID, String newComment) {
+		
+		m.rDB.editComment(itemID, userID, newComment);
+	}
+	
 	/**
 	 * @param newItem, a JSON String
 	 */
@@ -63,7 +89,7 @@ public class Catalog {
 	}
 	
 	/**
-	 * @param newItem, a JSON String
+	 * @param String i, an item ID
 	 */
 	public static void remove(Model m, String i) {
 		
