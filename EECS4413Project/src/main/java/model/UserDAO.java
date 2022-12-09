@@ -14,6 +14,7 @@ import com.amazonaws.services.dynamodbv2.document.AttributeUpdate;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.ItemCollection;
+import com.amazonaws.services.dynamodbv2.document.PutItemOutcome;
 import com.amazonaws.services.dynamodbv2.document.ScanOutcome;
 import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.dynamodbv2.document.spec.UpdateItemSpec;
@@ -54,7 +55,8 @@ public class UserDAO {
 		item.withString("address", u.getAddress());
 		item.withString("password", u.getPassword());
 		
-		table.putItem(item);
+		PutItemOutcome outcome = table.putItem(item);
+		//System.out.println(outcome.toString());
 	}
 	
 	public void delete(String ID) {
@@ -83,6 +85,9 @@ public class UserDAO {
 		
 		try {
 			Item item = table.getItem("ID", ID);
+			
+			if (item == null)
+				return null;
 			
 			String id = item.getString("ID");
 			String name = item.getString("name");
@@ -158,5 +163,26 @@ public class UserDAO {
 		}
 		
 		return names;
+	}
+	
+	public int getUserCount() {
+		
+		try {
+			Item item = table.getItem("ID", "u000");
+			int count = item.getInt("userCount");
+			
+			AttributeUpdate au = new AttributeUpdate("userCount").put(count + 1);
+			UpdateItemSpec update = new UpdateItemSpec().withPrimaryKey("ID", "u000");
+			update.addAttributeUpdate(au);
+			table.updateItem(update);
+			
+			return count;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		return -1;
 	}
 }
