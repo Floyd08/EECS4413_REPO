@@ -14,6 +14,7 @@ import com.amazonaws.services.dynamodbv2.document.AttributeUpdate;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.dynamodbv2.document.ItemCollection;
+import com.amazonaws.services.dynamodbv2.document.PutItemOutcome;
 import com.amazonaws.services.dynamodbv2.document.ScanOutcome;
 import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.dynamodbv2.document.spec.UpdateItemSpec;
@@ -54,7 +55,8 @@ public class UserDAO {
 		item.withString("address", u.getAddress());
 		item.withString("password", u.getPassword());
 		
-		table.putItem(item);
+		PutItemOutcome outcome = table.putItem(item);
+		//System.out.println(outcome.toString());
 	}
 	
 	public void delete(String ID) {
@@ -83,6 +85,9 @@ public class UserDAO {
 		
 		try {
 			Item item = table.getItem("ID", ID);
+			
+			if (item == null)
+				return null;
 			
 			String id = item.getString("ID");
 			String name = item.getString("name");
