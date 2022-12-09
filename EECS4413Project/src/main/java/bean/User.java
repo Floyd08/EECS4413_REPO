@@ -94,7 +94,7 @@ public class User implements Comparable<User> {
 	 * @throws NoSuchAlgorithmException
 	 */
 	
-	public String hashPassword(String password) throws NoSuchAlgorithmException {
+	public static String hashPassword(String password) throws NoSuchAlgorithmException {
 		
 		MessageDigest md = MessageDigest.getInstance("SHA-1");
 		byte[] hash = md.digest(password.getBytes());
