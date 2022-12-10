@@ -166,7 +166,7 @@ public class CentralControllerTest {
 		input.put("Method", "logIn");
 		input.put("Parameters", "{\""
 				+ "id\":\"u999\","
-				+ "\"pass\":\"testPassword\"}");
+				+ "\"pass\":\"u999password\"}");
 		response = testCentralController.handleRequest(input, testContext);
 		System.out.println(response);
 		
@@ -183,11 +183,6 @@ public class CentralControllerTest {
 				+ "\"aile\":\"u999aile\","
 				+ "\"postal\":\"u999postal\","
 				+ "\"address\":\"u999address\"}");
-		response = testCentralController.handleRequest(input, testContext);
-		System.out.println(response);
-		
-		input.put("Method", "logOut");
-		input.put("Parameters", "u999");
 		response = testCentralController.handleRequest(input, testContext);
 		System.out.println(response);
 		
@@ -210,6 +205,21 @@ public class CentralControllerTest {
 				+ "\"aile\":\"noIDaile\","
 				+ "\"postal\":\"noIDpostal\","
 				+ "\"address\":\"noIDaddress\"}");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "activeUsers");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "logIn");
+		input.put("Parameters", "{\""
+				+ "id\":\"u999\","
+				+ "\"pass\":\"u999password\"}");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "activeUsers");
 		response = testCentralController.handleRequest(input, testContext);
 		System.out.println(response);
 	}

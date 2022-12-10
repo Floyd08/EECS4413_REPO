@@ -275,6 +275,11 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 			}
 		}
 		
+		else if (eventMethod.equals("activeUsers")) {
+			response = "{'statusCode': " + 200 + ", " + 
+					"'body': '" + dataModel.loggedIn + "'}";
+		}
+		
 		else {
 			response = "{'statusCode': " + 404 + ", " + 
 					"'body': 'Error: Method not found.'}"; 
