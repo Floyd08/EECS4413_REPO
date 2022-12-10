@@ -175,10 +175,98 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 
 	public String toIdentityManager(Map<String, String> event) {
 		
-		// TODO: Implement call to identityManager
+		String eventMethod = event.get("Method");
+		String eventParameters = event.get("Parameters");
+		String response = "";
 		
-		String response = "{'statusCode': " + 200 + ", " + 
-				"'body': 'toIdentityManager succeeded'}"; 
+		if (eventMethod == null) {
+			response = "{'statusCode': " + 400 + ", " + 
+					"'body': 'Error: Method not specified.'}";
+		}
+		
+		else if (eventMethod.equals("userExists")) {
+			if (eventParameters == null) {
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
+			}
+			else {
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + IdentityManager.userExists(eventParameters) + "'}";
+			}
+		}
+		
+		else if (eventMethod.equals("logIn")) {
+			if (eventParameters == null) {
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
+			}
+			else {
+				JSONParser parser = new JSONParser();
+				try {
+					JSONObject jsonEventParameters = (JSONObject) parser.parse(eventParameters);
+					String id = jsonEventParameters.get("id").toString();
+					String pass = jsonEventParameters.get("pass").toString();
+					response = IdentityManager.logIn(id, pass);
+					response.replaceAll("message", "body");
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					response = "{'statusCode': " + 400 + ", " + 
+							"'body': 'Error: Parameters incorrect. {'id':'...', 'pass':'...'}";
+				}
+			}
+		}
+		
+		else if (eventMethod.equals("logOut")) {
+			if (eventParameters == null) {
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
+			}
+			else {
+				response = IdentityManager.logOut(eventParameters);
+				response.replaceAll("message", "body");
+			}
+		}
+		
+		else if (eventMethod.equals("register")) {
+			if (eventParameters == null) {
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
+			}
+			else {
+				JSONParser parser = new JSONParser();
+				try {
+					JSONObject jsonEventParameters = (JSONObject) parser.parse(eventParameters);
+					
+					String id = jsonEventParameters.get("id").toString();
+					String nomi = jsonEventParameters.get("nomi").toString();
+					String aile = jsonEventParameters.get("aile").toString();
+					String postal = jsonEventParameters.get("postal").toString();
+					String address = jsonEventParameters.get("address").toString();
+					String pass = jsonEventParameters.get("pass").toString();
+					
+					if (id == null) {
+						response = IdentityManager.register(nomi, aile, postal, address, pass);
+					}
+					else {
+						response = IdentityManager.register(id, nomi, aile, postal, address, pass);
+					}
+					
+					response.replaceAll("message", "body");
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					response = "{'statusCode': " + 400 + ", " + 
+							"'body': 'Error: Parameters incorrect. {'id':'...' (optional), "
+							+ "'pass':'...', 'nomi':'...', 'aile':'...', 'postal':'...', 'address':'...'}";
+				}
+			}
+		}
+		
+		else {
+			response = "{'statusCode': " + 404 + ", " + 
+					"'body': 'Error: Method not found.'}"; 
+		}
 		
 		return response;
 	}
