@@ -16,20 +16,29 @@ public class CentralControllerTest {
 		
 		String result = "";
 		
-		result = testMissingService();
-		System.out.println(result);
+		System.out.println("Testing for Missing Service: ");
+		testMissingService();
 		
+		System.out.println("Testing for Service not Found: ");
+		testServiceNotFound();
+		
+		System.out.println("Testing Catalog Methods: ");
 		testToCatalogComplete();
+		
+		System.out.println("Testing Catalog Errors: ");
 		testToCatalogErrors();
 		
 		result = testToIdentityManager();
 		System.out.println(result);
 		
-		result = testServiceNotFound();
-		System.out.println(result);
+		System.out.println("Testing ShoppingCart Methods: ");
+		testToShoppingCartComplete();
+		
+		System.out.println("Testing ShoppingCart Errors: ");
+		testToShoppingCartErrors();
 	}	
 	
-	public static String testMissingService() {
+	public static void testMissingService() {
 		
 		CentralController testCentralController = new CentralController();
 		
@@ -38,7 +47,21 @@ public class CentralControllerTest {
 		
 		String response = testCentralController.handleRequest(input, testContext);
 		
-		return response;
+		System.out.println(response);
+	}
+	
+	public static void testServiceNotFound() {
+		
+		CentralController testCentralController = new CentralController();
+		
+		Map<String, String> input = new HashMap<String, String>();
+		Context testContext = new TestContext();
+		
+		input.put("Service", "None");
+		
+		String response = testCentralController.handleRequest(input, testContext);
+		
+		System.out.println(response);
 	}
 	
 	public static void testToCatalogComplete() {
@@ -137,17 +160,115 @@ public class CentralControllerTest {
 		return response;
 	}
 	
-	public static String testServiceNotFound() {
+	public static void testToShoppingCartComplete() {
 		
 		CentralController testCentralController = new CentralController();
 		
 		Map<String, String> input = new HashMap<String, String>();
 		Context testContext = new TestContext();
 		
-		input.put("Service", "None");
+		input.put("Service", "ShoppingCart");
+		input.put("Method", "getOwner");
 		
+		String response = testCentralController.handleRequest(input, testContext);		
+		System.out.println(response);
+		
+		input.put("Method", "setOwner");
+		input.put("Parameters", "u999");
+		response = testCentralController.handleRequest(input, testContext);		
+		System.out.println(response);
+		
+		input.put("Method", "getOwner");
+		response = testCentralController.handleRequest(input, testContext);		
+		System.out.println(response);
+		
+		input.put("Method", "getCart");
+		response = testCentralController.handleRequest(input, testContext);		
+		System.out.println(response);
+		
+		input.put("Method", "addToCart");
+		input.put("Parameters", "{\""
+				+ "quantity\":\"100\","
+				+ "\"price\":\"100.00\","
+				+ "\"name\":\"testItem\","
+				+ "\"description\":\"This is a test item\","
+				+ "\"ID\":\"t001\","
+				+ "\"type\":\"food\","
+				+ "\"brand\":\"burnbrae\"}");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "getCart");
+		response = testCentralController.handleRequest(input, testContext);		
+		System.out.println(response);
+		
+		input.put("Method", "updateCartQuant");
+		input.put("Parameters", "{\"Item\":{\""
+				+ "quantity\":\"100\","
+				+ "\"price\":\"100.00\","
+				+ "\"name\":\"testItem\","
+				+ "\"description\":\"This is a test item\","
+				+ "\"ID\":\"t001\","
+				+ "\"type\":\"food\","
+				+ "\"brand\":\"burnbrae\"},"
+				+ "\"Quantity\":99}");
+		response = testCentralController.handleRequest(input, testContext);		
+		System.out.println(response);
+		
+		input.put("Method", "getCart");
+		response = testCentralController.handleRequest(input, testContext);		
+		System.out.println(response);
+		
+		input.put("Method", "getQuantity");
+		input.put("Parameters", "{\""
+				+ "quantity\":\"100\","
+				+ "\"price\":\"100.00\","
+				+ "\"name\":\"testItem\","
+				+ "\"description\":\"This is a test item\","
+				+ "\"ID\":\"t001\","
+				+ "\"type\":\"food\","
+				+ "\"brand\":\"burnbrae\"}");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "removeFromCart");
+		input.put("Parameters", "{\""
+				+ "quantity\":\"100\","
+				+ "\"price\":\"100.00\","
+				+ "\"name\":\"testItem\","
+				+ "\"description\":\"This is a test item\","
+				+ "\"ID\":\"t001\","
+				+ "\"type\":\"food\","
+				+ "\"brand\":\"burnbrae\"}");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "getCart");
+		response = testCentralController.handleRequest(input, testContext);		
+		System.out.println(response);
+		
+		input.put("Method", "isEmpty");
+		response = testCentralController.handleRequest(input, testContext);		
+		System.out.println(response);
+	}
+	
+	public static void testToShoppingCartErrors() {
+		
+		CentralController testCentralController = new CentralController();
+		
+		Map<String, String> input = new HashMap<String, String>();
+		Context testContext = new TestContext();
+		
+		input.put("Service", "ShoppingCart");
 		String response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
 		
-		return response;
+		input.put("Method", "???");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "get");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
 	}
 }

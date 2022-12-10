@@ -46,6 +46,10 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 			callResponse = toIdentityManager(event);	
 		}
 		
+		else if (eventService.equals("ShoppingCart")) {
+			callResponse = toShoppingCart(event);
+		}
+		
 		else {
 			callResponse = "{'statusCode': " + 404 + ", " + 
 					"'body': 'Error: Service not found.'}";
@@ -261,12 +265,11 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 						"'body': 'Error: Parameters missing.'}";
 			}
 			else {
-				
 				JSONParser parser = new JSONParser();
 				try {
 					JSONObject jsonEventParameters = (JSONObject) parser.parse(eventParameters);
 					ItemP itemToUpdate = ItemP.fromJSON(jsonEventParameters.get("Item").toString());
-					int newQuantity = (int) jsonEventParameters.get("Quantity");
+					int newQuantity = Integer.parseInt(jsonEventParameters.get("Quantity").toString());
 					shoppingCart.updateCartQuant(itemToUpdate, newQuantity);
 					response = "{'statusCode': " + 200 + ", " + 
 							"'body': '" + itemToUpdate.getName() + " has been updated to " + newQuantity + ".'}";
@@ -300,6 +303,11 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 				response = "{'statusCode': " + 200 + ", " + 
 						"'body': '" + shoppingCart.isEmpty() + "'}";
 			}
+		}
+		
+		else {
+			response = "{'statusCode': " + 404 + ", " + 
+					"'body': 'Error: Method not found.'}"; 
 		}
 		
 		return response;
