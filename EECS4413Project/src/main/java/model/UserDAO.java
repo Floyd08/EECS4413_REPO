@@ -31,17 +31,10 @@ import modelExceptions.NoPasswordMatchException;
  */
 public class UserDAO {
 	
-	AmazonDynamoDB ds;
-	DynamoDB ddb;
 	Table table;
 	
-	public UserDAO() {
+	public UserDAO(DynamoDB ddb) {
 		
-		//TO CONNECT TO DYNAMO LOCAL: comment out the line ds = ... and uncomment the other line
-		AWSStaticCredentialsProvider credentials = new AWSStaticCredentialsProvider(new BasicAWSCredentials("AKIAVKWM63KXGTCZ7VRE","LL8uQAja9sK3oPkSCEZzQvUjBpLEQTtugN0h9F+1"));
-		ds = AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_EAST_2).withCredentials(credentials).build();
-		//ds = AmazonDynamoDBClientBuilder.standard().withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("http://localhost:8000", "us-east-2")).build();
-		ddb = new DynamoDB(ds);
 		table = ddb.getTable("users");
 	}
 	
@@ -78,6 +71,10 @@ public class UserDAO {
 	public String retrieveAsJSON(String ID) {
 		
 		Item item = table.getItem("ID", ID);
+		
+		if (item == null)
+			return null;
+		
 		return item.toJSON();
 	}
 	
