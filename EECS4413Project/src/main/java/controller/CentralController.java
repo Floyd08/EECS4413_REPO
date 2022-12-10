@@ -194,6 +194,21 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					"'body': 'Error: Method not specified.'}";
 		}
 		
+		else if (eventMethod.equals("newShoppingCart")) {
+			if (eventParameters == null) {
+				shoppingCart = new ShoppingCart();
+				
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': 'A new Shopping Cart has been created.'}";
+			}
+			else {
+				shoppingCart = new ShoppingCart(eventParameters);
+				
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': 'A new Shopping Cart has been created and " + eventParameters + " has been set as the owner.'}";
+			}
+		}
+		
 		else if (eventMethod.equals("getOwner")) {
 			response = "{'statusCode': " + 200 + ", " + 
 					"'body': '" + shoppingCart.getOwner() + "'}";
