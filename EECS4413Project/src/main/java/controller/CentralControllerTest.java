@@ -239,7 +239,7 @@ public class CentralControllerTest {
 		response = testCentralController.handleRequest(input, testContext);
 		System.out.println(response);
 		
-		input.put("Method", "get");
+		input.put("Method", "logIn");
 		response = testCentralController.handleRequest(input, testContext);
 		System.out.println(response);
 	}
@@ -351,7 +351,7 @@ public class CentralControllerTest {
 		response = testCentralController.handleRequest(input, testContext);
 		System.out.println(response);
 		
-		input.put("Method", "get");
+		input.put("Method", "addToCart");
 		response = testCentralController.handleRequest(input, testContext);
 		System.out.println(response);
 	}
