@@ -207,9 +207,11 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					String id = jsonEventParameters.get("id").toString();
 					String pass = jsonEventParameters.get("pass").toString();
 					response = IdentityManager.logIn(id, pass);
-					response.replaceAll("message", "body");
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
+					response = response.replace("message", "body");
+					response = response.replace("status", "statusCode");
+					response = response.replaceAll("\"", "'");
+				} catch (Exception e) {
+					
 					e.printStackTrace();
 					response = "{'statusCode': " + 400 + ", " + 
 							"'body': 'Error: Parameters incorrect. {'id':'...', 'pass':'...'}";
@@ -224,7 +226,9 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 			}
 			else {
 				response = IdentityManager.logOut(eventParameters);
-				response.replaceAll("message", "body");
+				response = response.replace("message", "body");
+				response = response.replace("status", "statusCode");
+				response = response.replaceAll("\"", "'");
 			}
 		}
 		
@@ -238,7 +242,14 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 				try {
 					JSONObject jsonEventParameters = (JSONObject) parser.parse(eventParameters);
 					
-					String id = jsonEventParameters.get("id").toString();
+					String id;
+					
+					if (jsonEventParameters.get("id") == null) {
+						id = null;
+					}
+					else {
+						id = jsonEventParameters.get("id").toString();
+					}
 					String nomi = jsonEventParameters.get("nomi").toString();
 					String aile = jsonEventParameters.get("aile").toString();
 					String postal = jsonEventParameters.get("postal").toString();
@@ -252,10 +263,11 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 						response = IdentityManager.register(id, nomi, aile, postal, address, pass);
 					}
 					
-					response.replaceAll("message", "body");
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					response = response.replace("message", "body");
+					response = response.replace("status", "statusCode");
+					response = response.replaceAll("\"", "'");
+				} catch (Exception e) {
+					
 					response = "{'statusCode': " + 400 + ", " + 
 							"'body': 'Error: Parameters incorrect. {'id':'...' (optional), "
 							+ "'pass':'...', 'nomi':'...', 'aile':'...', 'postal':'...', 'address':'...'}";
@@ -376,8 +388,8 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					shoppingCart.updateCartQuant(itemToUpdate, newQuantity);
 					response = "{'statusCode': " + 200 + ", " + 
 							"'body': '" + itemToUpdate.getName() + " has been updated to " + newQuantity + ".'}";
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
+				} catch (Exception e) {
+					
 					e.printStackTrace();
 					response = "{'statusCode': " + 400 + ", " + 
 							"'body': 'Error: Parameters incorrect. {'Item':'...', 'Quantity':'...'}";
