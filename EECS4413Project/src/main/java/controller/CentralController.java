@@ -3,18 +3,26 @@ package controller;
 import java.util.ArrayList;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 
 import model.Model;
+import bean.ShoppingCart;
+import bean.ItemP;
 
 public class CentralController implements RequestHandler<Map<String, String>, String> {
 	
 	//CentralController will have the only access to the Model, so when a sub controller is called,
 	//it will be necessary to pass a reference to dataModel
 	static Model dataModel = Model.getInstance();
+	ShoppingCart shoppingCart;
 
 	public CentralController() {
+		shoppingCart = new ShoppingCart();
 	}
 
 	@Override
@@ -38,6 +46,10 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 			callResponse = toIdentityManager(event);	
 		}
 		
+		else if (eventService.equals("ShoppingCart")) {
+			callResponse = toShoppingCart(event);
+		}
+		
 		else {
 			callResponse = "{'statusCode': " + 404 + ", " + 
 					"'body': 'Error: Service not found.'}";
@@ -46,7 +58,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 		return callResponse;	//Just a place holder
 	}
 	
-	public static String toCatalog(Map<String, String> event) {
+	public String toCatalog(Map<String, String> event) {
 		
 		String eventMethod = event.get("Method");
 		String eventParameters = event.get("Parameters");
@@ -161,7 +173,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 		return response;
 	}
 
-	public static String toIdentityManager(Map<String, String> event) {
+	public String toIdentityManager(Map<String, String> event) {
 		
 		// TODO: Implement call to identityManager
 		
@@ -170,4 +182,150 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 		
 		return response;
 	}
+	
+	public String toShoppingCart(Map<String, String> event) {
+			
+		String eventMethod = event.get("Method");
+		String eventParameters = event.get("Parameters");
+		String response = "";
+		
+		if (eventMethod == null) {
+			response = "{'statusCode': " + 400 + ", " + 
+					"'body': 'Error: Method not specified.'}";
+		}
+		
+		else if (eventMethod.equals("newShoppingCart")) {
+			if (eventParameters == null) {
+				shoppingCart = new ShoppingCart();
+				
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': 'A new Shopping Cart has been created.'}";
+			}
+			else {
+				shoppingCart = new ShoppingCart(eventParameters);
+				
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': 'A new Shopping Cart has been created and " + eventParameters + " has been set as the owner.'}";
+			}
+		}
+		
+		else if (eventMethod.equals("getOwner")) {
+			response = "{'statusCode': " + 200 + ", " + 
+					"'body': '" + shoppingCart.getOwner() + "'}";
+		}
+		
+		else if (eventMethod.equals("setOwner")) {
+			if (eventParameters == null) {
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
+			}
+			else {
+				shoppingCart.setOwner(eventParameters);
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + eventParameters + " has been set as the owner of the shopping cart.'}";
+			}
+		}
+		
+		else if (eventMethod.equals("getCart")) {
+			response = "{'statusCode': " + 200 + ", " + 
+					"'body': '" + shoppingCart.cartToJSON() + "'}";
+		}
+		
+		else if (eventMethod.equals("setCart")) {
+			// TODO
+		}
+		
+		else if (eventMethod.equals("addToCart")) {
+			if (eventParameters == null) {
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
+			}
+			else {
+				ItemP itemToAdd = ItemP.fromJSON(eventParameters);
+				shoppingCart.AddToCart(itemToAdd);
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + itemToAdd.getName() + " has been added to the shopping cart.'}";
+			}
+		}
+		
+		else if (eventMethod.equals("removeFromCart")) {
+			if (eventParameters == null) {
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
+			}
+			else {
+				ItemP itemToRemove = ItemP.fromJSON(eventParameters);
+				shoppingCart.removeFromCart(itemToRemove);
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + itemToRemove.getName() + " has been removed from the shopping cart.'}";
+			}
+		}
+		
+		else if (eventMethod.equals("removeFromCart")) {
+			if (eventParameters == null) {
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
+			}
+			else {
+				ItemP itemToRemove = ItemP.fromJSON(eventParameters);
+				shoppingCart.removeFromCart(itemToRemove);
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + itemToRemove.getName() + " has been removed from the shopping cart.'}";
+			}
+		}
+		
+		else if (eventMethod.equals("updateCartQuant")) {
+			if (eventParameters == null) {
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
+			}
+			else {
+				JSONParser parser = new JSONParser();
+				try {
+					JSONObject jsonEventParameters = (JSONObject) parser.parse(eventParameters);
+					ItemP itemToUpdate = ItemP.fromJSON(jsonEventParameters.get("Item").toString());
+					int newQuantity = Integer.parseInt(jsonEventParameters.get("Quantity").toString());
+					shoppingCart.updateCartQuant(itemToUpdate, newQuantity);
+					response = "{'statusCode': " + 200 + ", " + 
+							"'body': '" + itemToUpdate.getName() + " has been updated to " + newQuantity + ".'}";
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					response = "{'statusCode': " + 400 + ", " + 
+							"'body': 'Error: Parameters incorrect. {'Item':'...', 'Quantity':'...'}";
+				}
+			}
+		}
+		
+		else if (eventMethod.equals("getQuantity")) {
+			if (eventParameters == null) {
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
+			}
+			else {
+				ItemP itemToCount = ItemP.fromJSON(eventParameters);
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + shoppingCart.getQuantity(itemToCount) + "'}";
+			}
+		}
+		
+		else if (eventMethod.equals("isEmpty")) {
+			if (eventParameters == null) {
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
+			}
+			else {
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + shoppingCart.isEmpty() + "'}";
+			}
+		}
+		
+		else {
+			response = "{'statusCode': " + 404 + ", " + 
+					"'body': 'Error: Method not found.'}"; 
+		}
+		
+		return response;
+	}
+	
 }
