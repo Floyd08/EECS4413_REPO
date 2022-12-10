@@ -28,8 +28,11 @@ public class CentralControllerTest {
 		System.out.println("Testing Catalog Errors: ");
 		testToCatalogErrors();
 		
-		result = testToIdentityManager();
-		System.out.println(result);
+		System.out.println("Testing IdentityManager Methods: ");
+		testToIdentityManagerComplete();
+		
+		System.out.println("Testing IdentityManager Errors: ");
+		testToIdentityManagerErrors();
 		
 		System.out.println("Testing ShoppingCart Methods: ");
 		testToShoppingCartComplete();
@@ -146,7 +149,7 @@ public class CentralControllerTest {
 		System.out.println(response);
 	}
 	
-	public static String testToIdentityManager() {
+	public static void testToIdentityManagerComplete() {
 		
 		CentralController testCentralController = new CentralController();
 		
@@ -154,10 +157,81 @@ public class CentralControllerTest {
 		Context testContext = new TestContext();
 		
 		input.put("Service", "IdentityManager");
+		input.put("Method", "userExists");
+		input.put("Parameters", "u999");
 		
 		String response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
 		
-		return response;
+		input.put("Method", "logIn");
+		input.put("Parameters", "{\""
+				+ "id\":\"u999\","
+				+ "\"pass\":\"testPassword\"}");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "logOut");
+		input.put("Parameters", "u999");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "register");
+		input.put("Parameters", "{\""
+				+ "id\":\"u999\","
+				+ "\"pass\":\"u999password\","
+				+ "\"nomi\":\"u999nomi\","
+				+ "\"aile\":\"u999aile\","
+				+ "\"postal\":\"u999postal\","
+				+ "\"address\":\"u999address\"}");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "logOut");
+		input.put("Parameters", "u999");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "logIn");
+		input.put("Parameters", "{\""
+				+ "id\":\"u999\","
+				+ "\"pass\":\"testPassword\"}");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "userExists");
+		input.put("Parameters", "u999");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "register");
+		input.put("Parameters", "{\""
+				+ "pass\":\"noIDpassword\","
+				+ "\"nomi\":\"noIDnomi\","
+				+ "\"aile\":\"noIDaile\","
+				+ "\"postal\":\"noIDpostal\","
+				+ "\"address\":\"noIDaddress\"}");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+	}
+	
+	public static void testToIdentityManagerErrors() {
+		
+		CentralController testCentralController = new CentralController();
+		
+		Map<String, String> input = new HashMap<String, String>();
+		Context testContext = new TestContext();
+		
+		input.put("Service", "IdentityManager");
+		String response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "???");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "get");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
 	}
 	
 	public static void testToShoppingCartComplete() {

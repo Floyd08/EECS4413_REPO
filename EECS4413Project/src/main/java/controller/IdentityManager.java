@@ -33,11 +33,11 @@ public final class IdentityManager{
 		Model dataModel = Model.getInstance();
 		String res = "{\r\n"
 				+ "  \"status\": 200,\r\n"
-				+ "  \"message\": \"Log in successful\",\r\n";
+				+ "  \"message\": \"Log in successful\"\r\n}";
 		if(!userExists(id)) {
 			res = "{\r\n"
 					+ "  \"status\": 400,\r\n"
-					+ "  \"message\": \"User does not exist\",\r\n";
+					+ "  \"message\": \"User does not exist\"\r\n}";
 			return res;
 		}
 		
@@ -47,7 +47,7 @@ public final class IdentityManager{
 			if (!((user.getID().equals(id) && (user.getPassword().equals(user.hashPassword(pass)))))) {
 				res = "{\r\n"
 						+ "  \"status\": 400,\r\n"
-						+ "  \"message\": \"The password is wrong\",\r\n";
+						+ "  \"message\": \"The password is wrong\"\r\n}";
 				return res;
 			}
 			dataModel.makeActive(id);
@@ -64,11 +64,11 @@ public final class IdentityManager{
 		Model dataModel = Model.getInstance();
 		String res = "{\r\n"
 				+ "  \"status\": 200,\r\n"
-				+ "  \"message\": \"Log out successful\",\r\n";
+				+ "  \"message\": \"Log out successful\"\r\n}";
 		if(!userExists(id)) {
 			res = "{\r\n"
 					+ "  \"status\": 400,\r\n"
-					+ "  \"message\": \"User does not exist\",\r\n";
+					+ "  \"message\": \"User does not exist\"\r\n}";
 		}
 		dataModel.makeInActive(id);
 		return res;
@@ -88,11 +88,11 @@ public final class IdentityManager{
 		Model dataModel = Model.getInstance();
 		String res = "{\r\n"
 				+ "  \"status\": 200,\r\n"
-				+ "  \"message\": \"Register successful\",\r\n";
+				+ "  \"message\": \"Register successful\"\r\n}";
 		if(userExists(id)) {
 			res = "{\r\n"
 					+ "  \"status\": 400,\r\n"
-					+ "  \"message\": \"User already exists\",\r\n";
+					+ "  \"message\": \"User already exists\"\r\n}";
 		}else {
 			try {
 			//User user = new User(id, nomi, aile, postal, address, pass);
