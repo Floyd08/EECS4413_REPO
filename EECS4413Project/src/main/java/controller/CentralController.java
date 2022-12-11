@@ -165,6 +165,140 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 						"'body': '" + eventParameters + " removed.'}";
 			}
 		}
+		
+		else if (eventMethod.equals("addReview")) {
+			if (eventParameters == null) {
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
+			}
+			else {
+				JSONParser parser = new JSONParser();
+				try {
+					JSONObject jsonEventParameters = (JSONObject) parser.parse(eventParameters);
+					String itemID = jsonEventParameters.get("itemID").toString();
+					String userID = jsonEventParameters.get("userID").toString();
+					String name = jsonEventParameters.get("name").toString();
+					String surName = jsonEventParameters.get("surName").toString();
+					String comment = jsonEventParameters.get("commment").toString();
+					
+					Catalog.addReview(dataModel, itemID, userID, name, surName, comment);
+					
+					response = "{'statusCode': " + 200 + ", " + 
+							"'body': 'The comment: " + comment + " has been added to " + itemID + ".'}";
+					
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+					response = "{'statusCode': " + 400 + ", " + 
+							"'userID': 'Error: Parameters incorrect. {'itemID':'...', "
+							+ "'pass':'...',"
+							+ "'name':'...',"
+							+ "'surName':'...',"
+							+ "'comment':'...'}";
+				}
+			}
+		}
+		
+		else if (eventMethod.equals("deleteReview")) {
+			if (eventParameters == null) {
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
+			}
+			else {
+				JSONParser parser = new JSONParser();
+				try {
+					JSONObject jsonEventParameters = (JSONObject) parser.parse(eventParameters);
+					String itemID = jsonEventParameters.get("itemID").toString();
+					String userID = jsonEventParameters.get("userID").toString();
+					
+					Catalog.deleteReview(dataModel, itemID, userID);
+					
+					response = "{'statusCode': " + 200 + ", " + 
+							"'body': 'The comment for " + itemID + " has been deleted.'}";
+					
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+					response = "{'statusCode': " + 400 + ", " + 
+							"'body': 'Error: Parameters incorrect. {'itemID':'...', 'userID':'...'}";
+				}
+			}
+		}
+		
+		else if (eventMethod.equals("getReview")) {
+			if (eventParameters == null) {
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
+			}
+			else {
+				JSONParser parser = new JSONParser();
+				try {
+					JSONObject jsonEventParameters = (JSONObject) parser.parse(eventParameters);
+					String itemID = jsonEventParameters.get("itemID").toString();
+					String userID = jsonEventParameters.get("userID").toString();
+					
+					response = "{'statusCode': " + 200 + ", " + 
+							"'body': ' " + Catalog.getReview(dataModel, itemID, userID) + "'}";
+					
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+					response = "{'statusCode': " + 400 + ", " + 
+							"'body': 'Error: Parameters incorrect. {'itemID':'...', 'userID':'...'}";
+				}
+			}
+		}
+		
+		else if (eventMethod.equals("getAllReviewsForItem")) {
+			if (eventParameters == null) {
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
+			}
+			else {
+				JSONParser parser = new JSONParser();
+				try {
+					JSONObject jsonEventParameters = (JSONObject) parser.parse(eventParameters);
+					String itemID = jsonEventParameters.get("itemID").toString();
+					
+					response = "{'statusCode': " + 200 + ", " + 
+							"'body': ' " + Catalog.getAllReviewsForItem(dataModel, itemID) + "'}";
+					
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+					response = "{'statusCode': " + 400 + ", " + 
+							"'body': 'Error: Parameters incorrect. {'itemID':'...'}";
+				}
+			}
+		}
+		
+		else if (eventMethod.equals("editComment")) {
+			if (eventParameters == null) {
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
+			}
+			else {
+				JSONParser parser = new JSONParser();
+				try {
+					JSONObject jsonEventParameters = (JSONObject) parser.parse(eventParameters);
+					String itemID = jsonEventParameters.get("itemID").toString();
+					String userID = jsonEventParameters.get("userID").toString();
+					String newComment = jsonEventParameters.get("newComment").toString();
+					
+					Catalog.deleteReview(dataModel, itemID, userID);
+					
+					response = "{'statusCode': " + 200 + ", " + 
+							"'body': 'The comment for " + itemID + " has been updated to: " + newComment + ".'}";
+					
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+					response = "{'statusCode': " + 400 + ", " + 
+							"'body': 'Error: Parameters incorrect. {'itemID':'...', 'userID':'...', 'newComment':'...'}";
+				}
+			}
+		}
+		
 		else {
 			response = "{'statusCode': " + 404 + ", " + 
 					"'body': 'Error: Method not found.'}"; 
