@@ -1,30 +1,28 @@
 package bean;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class POrder implements Comparable<POrder> {
 
 	private String ID;
-	private String name;
-	private String surName;
-	private String postalCode;
+	private String userID;
 	private String address;
+	private ArrayList<POItem> items;
 	
 	//Default Constructor
 	public POrder() {
 		ID = "-1";
-		this.name = "John";
-		this.surName = "Jackson";
-		this.postalCode = "1A1 A1A";
+		this.userID = "-1";
 		this.address = "-1";
+		this.items = new ArrayList<POItem>();
 	}
 	
-	public POrder(String iD, String name, String surName, String postalCode, String address) {
+	public POrder(String iD, String userID, String address, ArrayList<POItem> items) {
 		ID = iD;
-		this.name = name;
-		this.surName = surName;
-		this.postalCode = postalCode;
+		this.userID = userID;
 		this.address = address;
+		this.items = items;
 	}
 
 	public String getID() {
@@ -34,29 +32,13 @@ public class POrder implements Comparable<POrder> {
 	public void setID(String iD) {
 		ID = iD;
 	}
-
-	public String getName() {
-		return name;
+	
+	public String getUserID() {
+		return userID;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getSurName() {
-		return surName;
-	}
-
-	public void setSurName(String surName) {
-		this.surName = surName;
-	}
-
-	public String getPostalCode() {
-		return postalCode;
-	}
-
-	public void setPostalCode(String postalCode) {
-		this.postalCode = postalCode;
+	public void setUserID(String userID) {
+		this.userID = userID;
 	}
 
 	public String getAddress() {
@@ -67,10 +49,18 @@ public class POrder implements Comparable<POrder> {
 		this.address = address;
 	}
 	
+	public ArrayList<POItem> getItems() {
+		return items;
+	}
+
+	public void setItems(ArrayList<POItem> items) {
+		this.items = items;
+	}
+	
 	@Override
 	public String toString() {
 		
-		return String.format("(ID:%s name:%s surName:%s postalCode:%s address:%s)", ID, name, surName, postalCode, address);
+		return String.format("(ID:%s userID:%s address:%s)", ID, userID, address);
 	}
 	
 	@Override
@@ -81,7 +71,7 @@ public class POrder implements Comparable<POrder> {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(ID, address, name, postalCode, surName);
+		return Objects.hash(ID, address, userID);
 	}
 
 	@Override
@@ -96,8 +86,7 @@ public class POrder implements Comparable<POrder> {
 		POrder other = (POrder) obj;
 		
 		return Objects.equals(ID, other.ID) && Objects.equals(address, other.address)
-				&& Objects.equals(name, other.name) && Objects.equals(postalCode, other.postalCode)
-				&& Objects.equals(surName, other.surName);
+				&& Objects.equals(userID, other.userID);
 	}
 	
 	

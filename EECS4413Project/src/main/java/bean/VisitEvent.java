@@ -4,24 +4,28 @@ import java.util.Objects;
 
 public class VisitEvent implements Comparable<VisitEvent> {
 	
+	private String ID;
 	private String ipAddress;
 	private String day;
-	private String ID;
+	private String itemID;
 	private String type;
 	
 	//Default Constructor
 	public VisitEvent() {
 		
+		this.ID = "-1";
 		this.ipAddress = "noAddress";
 		this.day = "NA";
-		ID = "-1";
+		this.itemID = "-1";
 		this.type = "Empty";
 	}
 	
-	public VisitEvent(String ipAddress, String day, String iD, String type) {
+	public VisitEvent(String iD, String ipAddress, String day, String itemID, String type) {
+		
+		this.ID = iD;
 		this.ipAddress = ipAddress;
 		this.day = day;
-		ID = iD;
+		this.itemID = iD;
 		this.type = type;
 	}
 
@@ -42,11 +46,11 @@ public class VisitEvent implements Comparable<VisitEvent> {
 	}
 
 	public String getID() {
-		return ID;
+		return itemID;
 	}
 
 	public void setID(String iD) {
-		ID = iD;
+		itemID = iD;
 	}
 
 	public String getType() {
@@ -85,7 +89,7 @@ public class VisitEvent implements Comparable<VisitEvent> {
 		
 		VisitEvent other = (VisitEvent) obj;
 		
-		return Objects.equals(ID, other.ID) && Objects.equals(day, other.day)
+		return Objects.equals(itemID, other.itemID) && Objects.equals(day, other.day)
 				&& Objects.equals(ipAddress, other.ipAddress) && Objects.equals(type, other.type);
 	}
 	
