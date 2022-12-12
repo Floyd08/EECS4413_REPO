@@ -71,7 +71,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 		
 		else if (eventMethod.equals("viewAll")) {
 			String catalogResponse = Catalog.viewAll(dataModel).toString();
-			catalogResponse = jsonListBracketReplace(catalogResponse);
+			//catalogResponse = jsonListBracketReplace(catalogResponse);
 			response = "{\"statusCode\": " + 200 + ", " + 
 					"\"body\": \"" + catalogResponse + "\"}";
 		}
@@ -83,7 +83,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 			}
 			else {
 				String catalogResponse = Catalog.viewByType(dataModel, eventParameters).toString();
-				catalogResponse = jsonListBracketReplace(catalogResponse);
+				//catalogResponse = jsonListBracketReplace(catalogResponse);
 				response = "{\"statusCode\": " + 200 + ", " + 
 						"\"body\": \"" + catalogResponse + "\"}";
 			}
@@ -96,7 +96,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 			}
 			else {
 				String catalogResponse = Catalog.viewByBrand(dataModel, eventParameters).toString();
-				catalogResponse = jsonListBracketReplace(catalogResponse);
+				//catalogResponse = jsonListBracketReplace(catalogResponse);
 				response = "{\"statusCode\": " + 200 + ", " + 
 						"\"body\": \"" + catalogResponse + "\"}";
 			}
@@ -259,7 +259,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 			}
 			else {
 				String catalogResponse = Catalog.getAllReviewsForItem(dataModel, eventParameters).toString();
-				catalogResponse = jsonListBracketReplace(catalogResponse);
+				//catalogResponse = jsonListBracketReplace(catalogResponse);
 				response = "{\"statusCode\": " + 200 + ", " + 
 						"\"body\": \"" + catalogResponse + "\"}";
 			}
