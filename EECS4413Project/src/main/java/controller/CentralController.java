@@ -34,8 +34,8 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 		String callResponse = "";
 		
 		if (eventService == null) {
-			callResponse = "{\"statusCode\": " + 400 + ", " + 
-					"\"body\": \"Error: Service not specified.\"}";
+			callResponse = "{'statusCode': " + 400 + ", " + 
+					"'body': 'Error: Service not specified.'}";
 		}
 		else if (eventService.equals("Catalog")) {
 			
@@ -51,8 +51,8 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 		}
 		
 		else {
-			callResponse = "{\"statusCode\": " + 404 + ", " + 
-					"\"body\": \"Error: Service not found.\"}";
+			callResponse = "{'statusCode': " + 404 + ", " + 
+					"'body': 'Error: Service not found.'}";
 		}
 		
 		return callResponse;	//Just a place holder
@@ -65,111 +65,111 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 		String response = "";
 		
 		if (eventMethod == null) {
-			response = "{\"statusCode\": " + 400 + ", " + 
-					"\"body\": \"Error: Method not specified.\"}";
+			response = "{'statusCode': " + 400 + ", " + 
+					"'body': 'Error: Method not specified.'}";
 		}
 		
 		else if (eventMethod.equals("viewAll")) {
 			String catalogResponse = Catalog.viewAll(dataModel).toString();
-			response = "{\"statusCode\": " + 200 + ", " + 
-					"\"body\": \"" + catalogResponse + "\"}";
+			response = "{'statusCode': " + 200 + ", " + 
+					"'body': '" + catalogResponse + "'}";
 		}
 		
 		else if (eventMethod.equals("viewByType")) {
 			if (eventParameters == null) {
-				response = "{\"statusCode\": " + 400 + ", " + 
-						"\"body\": \"Error: Parameters missing.\"}";
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
 			}
 			else {
 				String catalogResponse = Catalog.viewByType(dataModel, eventParameters).toString();
-				response = "{\"statusCode\": " + 200 + ", " + 
-						"\"body\": \"" + catalogResponse + "\"}";
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + catalogResponse + "'}";
 			}
 		}
 		
 		else if (eventMethod.equals("viewByBrand")) {
 			if (eventParameters == null) {
-				response = "{\"statusCode\": " + 400 + ", " + 
-						"\"body\": \"Error: Parameters missing.\"}";
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
 			}
 			else {
 				String catalogResponse = Catalog.viewByBrand(dataModel, eventParameters).toString();
-				response = "{\"statusCode\": " + 200 + ", " + 
-						"\"body\": \"" + catalogResponse + "\"}";
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + catalogResponse + "'}";
 			}
 		}
 		
 		else if (eventMethod.equals("getNameMap")) {
 			String catalogResponse = Catalog.getNameMap(dataModel).toString();
-			response = "{\"statusCode\": " + 200 + ", " + 
-					"\"body\": \"" + catalogResponse + "\"}";
+			response = "{'statusCode': " + 200 + ", " + 
+					"'body': '" + catalogResponse + "'}";
 		}
 		
 		else if (eventMethod.equals("getBrandList")) {
 			String catalogResponse = Catalog.getBrandList(dataModel).toString();
-			response = "{\"statusCode\": " + 200 + ", " + 
-					"\"body\": \"" + catalogResponse + "\"}";
+			response = "{'statusCode': " + 200 + ", " + 
+					"'body': '" + catalogResponse + "'}";
 		}
 		
 		else if (eventMethod.equals("getTypeList")) {
 			String catalogResponse = Catalog.getTypeList(dataModel).toString();
-			response = "{\"statusCode\": " + 200 + ", " + 
-					"\"body\": \"" + catalogResponse + "\"}";
+			response = "{'statusCode': " + 200 + ", " + 
+					"'body': '" + catalogResponse + "'}";
 		}
 		
 		else if (eventMethod.equals("add")) {
 			if (eventParameters == null) {
-				response = "{\"statusCode\": " + 400 + ", " + 
-						"\"body\": \"Error: Parameters missing.\"}";
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
 			}
 			else {
 				Catalog.add(dataModel, eventParameters);
-				response = "{\"statusCode\": " + 200 + ", " + 
-						"\"body\": \"" + eventParameters + " added.\"}";
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + eventParameters + " added.'}";
 			}
 		}
 		
 		else if (eventMethod.equals("addMany")) {
 			if (eventParameters == null) {
-				response = "{\"statusCode\": " + 400 + ", " + 
-						"\"body\": \"Error: Parameters missing.\"}";
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
 			}
 			else {
 				// TODO
 //				Catalog.addMany(dataModel, itemsToAdd);
-//				response = "{\"statusCode\": " + 200 + ", " + 
-//						"\"body\": \"" + eventParameters + " added.";
+//				response = "{'statusCode': " + 200 + ", " + 
+//						"'body': '" + eventParameters + " added.";
 			}
 		}
 		
 		else if (eventMethod.equals("get")) {
 			if (eventParameters == null) {
-				response = "{\"statusCode\": " + 400 + ", " + 
-						"\"body\": \"Error: Parameters missing.\"}";
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
 			}
 			else {
 				String catalogResponse = Catalog.get(dataModel, eventParameters);
-				response = "{\"statusCode\": " + 200 + ", " + 
-						"\"body\": \"" + catalogResponse + "\"}";
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + catalogResponse + "'}";
 			}
 		}
 		
 		else if (eventMethod.equals("remove")) {
 			if (eventParameters == null) {
-				response = "{\"statusCode\": " + 400 + ", " + 
-						"\"body\": \"Error: Parameters missing.\"}";
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
 			}
 			else {
 				Catalog.remove(dataModel, eventParameters);
-				response = "{\"statusCode\": " + 200 + ", " + 
-						"\"body\": \"" + eventParameters + " removed.\"}";
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + eventParameters + " removed.'}";
 			}
 		}
 		
 		else if (eventMethod.equals("addReview")) {
 			if (eventParameters == null) {
-				response = "{\"statusCode\": " + 400 + ", " + 
-						"\"body\": \"Error: Parameters missing.\"}";
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
 			}
 			else {
 				JSONParser parser = new JSONParser();
@@ -183,26 +183,26 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					
 					Catalog.addReview(dataModel, itemID, userID, name, surName, comment);
 					
-					response = "{\"statusCode\": " + 200 + ", " + 
-							"\"body\": \"The comment: " + comment + " has been added to " + itemID + ".\"}";
+					response = "{'statusCode': " + 200 + ", " + 
+							"'body': 'The comment: " + comment + " has been added to " + itemID + ".'}";
 					
 				} catch (Exception e) {
 					
 					e.printStackTrace();
-					response = "{\"statusCode\": " + 400 + ", " + 
-							"\"Error: Parameters incorrect. {\"itemID\":\"...\", "
-							+ "\"userID\":\"...\","
-							+ "\"name\":\"...\","
-							+ "\"surName\":\"...\","
-							+ "\"comment\":\"...\"}";
+					response = "{'statusCode': " + 400 + ", " + 
+							"'Error: Parameters incorrect. {'itemID':'...', "
+							+ "'userID':'...',"
+							+ "'name':'...',"
+							+ "'surName':'...',"
+							+ "'comment':'...'}";
 				}
 			}
 		}
 		
 		else if (eventMethod.equals("deleteReview")) {
 			if (eventParameters == null) {
-				response = "{\"statusCode\": " + 400 + ", " + 
-						"\"body\": \"Error: Parameters missing.\"}";
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
 			}
 			else {
 				JSONParser parser = new JSONParser();
@@ -213,22 +213,22 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					
 					Catalog.deleteReview(dataModel, itemID, userID);
 					
-					response = "{\"statusCode\": " + 200 + ", " + 
-							"\"body\": \"The comment for " + itemID + " has been deleted.\"}";
+					response = "{'statusCode': " + 200 + ", " + 
+							"'body': 'The comment for " + itemID + " has been deleted.'}";
 					
 				} catch (Exception e) {
 					
 					e.printStackTrace();
-					response = "{\"statusCode\": " + 400 + ", " + 
-							"\"body\": \"Error: Parameters incorrect. {\"itemID\":\"...\", \"userID\":\"...\"}";
+					response = "{'statusCode': " + 400 + ", " + 
+							"'body': 'Error: Parameters incorrect. {'itemID':'...', 'userID':'...'}";
 				}
 			}
 		}
 		
 		else if (eventMethod.equals("getReview")) {
 			if (eventParameters == null) {
-				response = "{\"statusCode\": " + 400 + ", " + 
-						"\"body\": \"Error: Parameters missing.\"}";
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
 			}
 			else {
 				JSONParser parser = new JSONParser();
@@ -237,33 +237,33 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					String itemID = jsonEventParameters.get("itemID").toString();
 					String userID = jsonEventParameters.get("userID").toString();
 					
-					response = "{\"statusCode\": " + 200 + ", " + 
-							"\"body\": \"" + Catalog.getReview(dataModel, itemID, userID) + "\"}";
+					response = "{'statusCode': " + 200 + ", " + 
+							"'body': '" + Catalog.getReview(dataModel, itemID, userID) + "'}";
 					
 				} catch (Exception e) {
 					
 					e.printStackTrace();
-					response = "{\"statusCode\": " + 400 + ", " + 
-							"\"body\": \"Error: Parameters incorrect. {\"itemID\":\"...\", \"userID\":\"...\"}";
+					response = "{'statusCode': " + 400 + ", " + 
+							"'body': 'Error: Parameters incorrect. {'itemID':'...', 'userID':'...'}";
 				}
 			}
 		}
 		
 		else if (eventMethod.equals("getAllReviewsForItem")) {
 			if (eventParameters == null) {
-				response = "{\"statusCode\": " + 400 + ", " + 
-						"\"body\": \"Error: Parameters missing.\"}";
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
 			}
 			else {
-				response = "{\"statusCode\": " + 200 + ", " + 
-						"\"body\": \"" + Catalog.getAllReviewsForItem(dataModel, eventParameters) + "\"}";
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + Catalog.getAllReviewsForItem(dataModel, eventParameters) + "'}";
 			}
 		}
 		
 		else if (eventMethod.equals("editComment")) {
 			if (eventParameters == null) {
-				response = "{\"statusCode\": " + 400 + ", " + 
-						"\"body\": \"Error: Parameters missing.\"}";
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
 			}
 			else {
 				JSONParser parser = new JSONParser();
@@ -275,22 +275,26 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					
 					Catalog.editComment(dataModel, itemID, userID, newComment);
 					
-					response = "{\"statusCode\": " + 200 + ", " + 
-							"\"body\": \"The comment for " + itemID + " has been updated to: " + newComment + ".\"}";
+					response = "{'statusCode': " + 200 + ", " + 
+							"'body': 'The comment for " + itemID + " has been updated to: " + newComment + ".'}";
 					
 				} catch (Exception e) {
 					
 					e.printStackTrace();
-					response = "{\"statusCode\": " + 400 + ", " + 
-							"\"body\": \"Error: Parameters incorrect. {\"itemID\":\"...\", \"userID\":\"...\", \"newComment\":\"...\"}";
+					response = "{'statusCode': " + 400 + ", " + 
+							"'body': 'Error: Parameters incorrect. {'itemID':'...', 'userID':'...', 'newComment':'...'}";
 				}
 			}
 		}
 		
 		else {
-			response = "{\"statusCode\": " + 404 + ", " + 
-					"\"body\": \"Error: Method not found.\"}"; 
+			response = "{'statusCode': " + 404 + ", " + 
+					"'body': 'Error: Method not found.'}"; 
 		}
+		
+		response = response.replaceAll("\"", "'");
+		response = response.replaceAll("'\\[", "\\[");
+		response = response.replaceAll("\\]'", "\\]");
 		
 		return response;
 	}
@@ -302,25 +306,25 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 		String response = "";
 		
 		if (eventMethod == null) {
-			response = "{\"statusCode\": " + 400 + ", " + 
-					"\"body\": \"Error: Method not specified.\"}";
+			response = "{'statusCode': " + 400 + ", " + 
+					"'body': 'Error: Method not specified.'}";
 		}
 		
 		else if (eventMethod.equals("userExists")) {
 			if (eventParameters == null) {
-				response = "{\"statusCode\": " + 400 + ", " + 
-						"\"body\": \"Error: Parameters missing.\"}";
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
 			}
 			else {
-				response = "{\"statusCode\": " + 200 + ", " + 
-						"\"body\": \"" + IdentityManager.userExists(eventParameters) + "\"}";
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + IdentityManager.userExists(eventParameters) + "'}";
 			}
 		}
 		
 		else if (eventMethod.equals("logIn")) {
 			if (eventParameters == null) {
-				response = "{\"statusCode\": " + 400 + ", " + 
-						"\"body\": \"Error: Parameters missing.\"}";
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
 			}
 			else {
 				JSONParser parser = new JSONParser();
@@ -331,33 +335,31 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					response = IdentityManager.logIn(id, pass);
 					response = response.replace("message", "body");
 					response = response.replace("status", "statusCode");
-					response = response.replaceAll("\"", "\"");
 				} catch (Exception e) {
 					
 					e.printStackTrace();
-					response = "{\"statusCode\": " + 400 + ", " + 
-							"\"body\": \"Error: Parameters incorrect. {\"id\":\"...\", \"pass\":\"...\"}";
+					response = "{'statusCode': " + 400 + ", " + 
+							"'body': 'Error: Parameters incorrect. {'id':'...', 'pass':'...'}";
 				}
 			}
 		}
 		
 		else if (eventMethod.equals("logOut")) {
 			if (eventParameters == null) {
-				response = "{\"statusCode\": " + 400 + ", " + 
-						"\"body\": \"Error: Parameters missing.\"}";
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
 			}
 			else {
 				response = IdentityManager.logOut(eventParameters);
 				response = response.replace("message", "body");
 				response = response.replace("status", "statusCode");
-				response = response.replaceAll("\"", "\"");
 			}
 		}
 		
 		else if (eventMethod.equals("register")) {
 			if (eventParameters == null) {
-				response = "{\"statusCode\": " + 400 + ", " + 
-						"\"body\": \"Error: Parameters missing.\"}";
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
 			}
 			else {
 				JSONParser parser = new JSONParser();
@@ -387,25 +389,28 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					
 					response = response.replace("message", "body");
 					response = response.replace("status", "statusCode");
-					response = response.replaceAll("\"", "\"");
 				} catch (Exception e) {
 					
-					response = "{\"statusCode\": " + 400 + ", " + 
-							"\"body\": \"Error: Parameters incorrect. {\"id\":\"...\" (optional), "
-							+ "\"pass\":\"...\", \"nomi\":\"...\", \"aile\":\"...\", \"postal\":\"...\", \"address\":\"...\"}";
+					response = "{'statusCode': " + 400 + ", " + 
+							"'body': 'Error: Parameters incorrect. {'id':'...' (optional), "
+							+ "'pass':'...', 'nomi':'...', 'aile':'...', 'postal':'...', 'address':'...'}";
 				}
 			}
 		}
 		
 		else if (eventMethod.equals("activeUsers")) {
-			response = "{\"statusCode\": " + 200 + ", " + 
-					"\"body\": \"" + dataModel.loggedIn + "\"}";
+			response = "{'statusCode': " + 200 + ", " + 
+					"'body': '" + dataModel.loggedIn + "'}";
 		}
 		
 		else {
-			response = "{\"statusCode\": " + 404 + ", " + 
-					"\"body\": \"Error: Method not found.\"}"; 
+			response = "{'statusCode': " + 404 + ", " + 
+					"'body': 'Error: Method not found.'}"; 
 		}
+		
+		response = response.replaceAll("\"", "'");
+		response = response.replaceAll("'\\[", "\\[");
+		response = response.replaceAll("\\]'", "\\]");
 		
 		return response;
 	}
@@ -417,45 +422,45 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 		String response = "";
 		
 		if (eventMethod == null) {
-			response = "{\"statusCode\": " + 400 + ", " + 
-					"\"body\": \"Error: Method not specified.\"}";
+			response = "{'statusCode': " + 400 + ", " + 
+					"'body': 'Error: Method not specified.'}";
 		}
 		
 		else if (eventMethod.equals("newShoppingCart")) {
 			if (eventParameters == null) {
 				shoppingCart = new ShoppingCart();
 				
-				response = "{\"statusCode\": " + 200 + ", " + 
-						"\"body\": \"A new Shopping Cart has been created.\"}";
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': 'A new Shopping Cart has been created.'}";
 			}
 			else {
 				shoppingCart = new ShoppingCart(eventParameters);
 				
-				response = "{\"statusCode\": " + 200 + ", " + 
-						"\"body\": \"A new Shopping Cart has been created and " + eventParameters + " has been set as the owner.\"}";
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': 'A new Shopping Cart has been created and " + eventParameters + " has been set as the owner.'}";
 			}
 		}
 		
 		else if (eventMethod.equals("getOwner")) {
-			response = "{\"statusCode\": " + 200 + ", " + 
-					"\"body\": \"" + shoppingCart.getOwner() + "\"}";
+			response = "{'statusCode': " + 200 + ", " + 
+					"'body': '" + shoppingCart.getOwner() + "'}";
 		}
 		
 		else if (eventMethod.equals("setOwner")) {
 			if (eventParameters == null) {
-				response = "{\"statusCode\": " + 400 + ", " + 
-						"\"body\": \"Error: Parameters missing.\"}";
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
 			}
 			else {
 				shoppingCart.setOwner(eventParameters);
-				response = "{\"statusCode\": " + 200 + ", " + 
-						"\"body\": \"" + eventParameters + " has been set as the owner of the shopping cart.\"}";
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + eventParameters + " has been set as the owner of the shopping cart.'}";
 			}
 		}
 		
 		else if (eventMethod.equals("getCart")) {
-			response = "{\"statusCode\": " + 200 + ", " + 
-					"\"body\": \"" + shoppingCart.cartToJSON() + "\"}";
+			response = "{'statusCode': " + 200 + ", " + 
+					"'body': '" + shoppingCart.cartToJSON() + "'}";
 		}
 		
 		else if (eventMethod.equals("setCart")) {
@@ -464,47 +469,47 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 		
 		else if (eventMethod.equals("addToCart")) {
 			if (eventParameters == null) {
-				response = "{\"statusCode\": " + 400 + ", " + 
-						"\"body\": \"Error: Parameters missing.\"}";
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
 			}
 			else {
 				ItemP itemToAdd = ItemP.fromJSON(eventParameters);
 				shoppingCart.AddToCart(itemToAdd);
-				response = "{\"statusCode\": " + 200 + ", " + 
-						"\"body\": \"" + itemToAdd.getName() + " has been added to the shopping cart.\"}";
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + itemToAdd.getName() + " has been added to the shopping cart.'}";
 			}
 		}
 		
 		else if (eventMethod.equals("removeFromCart")) {
 			if (eventParameters == null) {
-				response = "{\"statusCode\": " + 400 + ", " + 
-						"\"body\": \"Error: Parameters missing.\"}";
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
 			}
 			else {
 				ItemP itemToRemove = ItemP.fromJSON(eventParameters);
 				shoppingCart.removeFromCart(itemToRemove);
-				response = "{\"statusCode\": " + 200 + ", " + 
-						"\"body\": \"" + itemToRemove.getName() + " has been removed from the shopping cart.\"}";
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + itemToRemove.getName() + " has been removed from the shopping cart.'}";
 			}
 		}
 		
 		else if (eventMethod.equals("removeFromCart")) {
 			if (eventParameters == null) {
-				response = "{\"statusCode\": " + 400 + ", " + 
-						"\"body\": \"Error: Parameters missing.\"}";
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
 			}
 			else {
 				ItemP itemToRemove = ItemP.fromJSON(eventParameters);
 				shoppingCart.removeFromCart(itemToRemove);
-				response = "{\"statusCode\": " + 200 + ", " + 
-						"\"body\": \"" + itemToRemove.getName() + " has been removed from the shopping cart.\"}";
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + itemToRemove.getName() + " has been removed from the shopping cart.'}";
 			}
 		}
 		
 		else if (eventMethod.equals("updateCartQuant")) {
 			if (eventParameters == null) {
-				response = "{\"statusCode\": " + 400 + ", " + 
-						"\"body\": \"Error: Parameters missing.\"}";
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
 			}
 			else {
 				JSONParser parser = new JSONParser();
@@ -513,44 +518,48 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					ItemP itemToUpdate = ItemP.fromJSON(jsonEventParameters.get("Item").toString());
 					int newQuantity = Integer.parseInt(jsonEventParameters.get("Quantity").toString());
 					shoppingCart.updateCartQuant(itemToUpdate, newQuantity);
-					response = "{\"statusCode\": " + 200 + ", " + 
-							"\"body\": \"" + itemToUpdate.getName() + " has been updated to " + newQuantity + ".\"}";
+					response = "{'statusCode': " + 200 + ", " + 
+							"'body': '" + itemToUpdate.getName() + " has been updated to " + newQuantity + ".'}";
 				} catch (Exception e) {
 					
 					e.printStackTrace();
-					response = "{\"statusCode\": " + 400 + ", " + 
-							"\"body\": \"Error: Parameters incorrect. {\"Item\":\"...\", \"Quantity\":\"...\"}";
+					response = "{'statusCode': " + 400 + ", " + 
+							"'body': 'Error: Parameters incorrect. {'Item':'...', 'Quantity':'...'}";
 				}
 			}
 		}
 		
 		else if (eventMethod.equals("getQuantity")) {
 			if (eventParameters == null) {
-				response = "{\"statusCode\": " + 400 + ", " + 
-						"\"body\": \"Error: Parameters missing.\"}";
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
 			}
 			else {
 				ItemP itemToCount = ItemP.fromJSON(eventParameters);
-				response = "{\"statusCode\": " + 200 + ", " + 
-						"\"body\": \"" + shoppingCart.getQuantity(itemToCount) + "\"}";
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + shoppingCart.getQuantity(itemToCount) + "'}";
 			}
 		}
 		
 		else if (eventMethod.equals("isEmpty")) {
 			if (eventParameters == null) {
-				response = "{\"statusCode\": " + 400 + ", " + 
-						"\"body\": \"Error: Parameters missing.\"}";
+				response = "{'statusCode': " + 400 + ", " + 
+						"'body': 'Error: Parameters missing.'}";
 			}
 			else {
-				response = "{\"statusCode\": " + 200 + ", " + 
-						"\"body\": \"" + shoppingCart.isEmpty() + "\"}";
+				response = "{'statusCode': " + 200 + ", " + 
+						"'body': '" + shoppingCart.isEmpty() + "'}";
 			}
 		}
 		
 		else {
-			response = "{\"statusCode\": " + 404 + ", " + 
-					"\"body\": \"Error: Method not found.\"}"; 
+			response = "{'statusCode': " + 404 + ", " + 
+					"'body': 'Error: Method not found.'}"; 
 		}
+		
+		response = response.replaceAll("\"", "'");
+		response = response.replaceAll("'\\[", "\\[");
+		response = response.replaceAll("\\]'", "\\]");
 		
 		return response;
 	}
