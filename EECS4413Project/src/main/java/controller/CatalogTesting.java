@@ -71,8 +71,8 @@ public class CatalogTesting {
 			Catalog.addReview(m, "a006", "u004", "John", "Smith", "I like the way coffee tastes, because it tastes like coffee, which is nice");
 			Catalog.addReview(m, "a016", "u004", "John", "Smith", "mmmmmm, cheeeese");
 			//Catalog.deleteReview(m, "a006", "u004");
-			//String r1 = Catalog.getReview(m, "a016", "u004");
-			//System.out.println(r1);
+			String r1 = Catalog.getReview(m, "a016", "u004");
+			System.out.println(r1);
 			//rS.editComment("a006", "u004", "Boooo coffee, booo");
 			list = Catalog.getAllReviewsForItem(m, "a006");
 			System.out.println(list.toString());

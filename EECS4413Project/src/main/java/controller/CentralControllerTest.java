@@ -19,25 +19,25 @@ public class CentralControllerTest {
 		System.out.println("Testing for Missing Service: ");
 		testMissingService();
 		
-		System.out.println("Testing for Service not Found: ");
+		System.out.println("\nTesting for Service not Found: ");
 		testServiceNotFound();
 		
-		System.out.println("Testing Catalog Methods: ");
+		System.out.println("\nTesting Catalog Methods: ");
 		testToCatalogComplete();
 		
-		System.out.println("Testing Catalog Errors: ");
+		System.out.println("\nTesting Catalog Errors: ");
 		testToCatalogErrors();
 		
-		System.out.println("Testing IdentityManager Methods: ");
+		System.out.println("\nTesting IdentityManager Methods: ");
 		testToIdentityManagerComplete();
 		
-		System.out.println("Testing IdentityManager Errors: ");
+		System.out.println("\nTesting IdentityManager Errors: ");
 		testToIdentityManagerErrors();
 		
-		System.out.println("Testing ShoppingCart Methods: ");
+		System.out.println("\nTesting ShoppingCart Methods: ");
 		testToShoppingCartComplete();
 		
-		System.out.println("Testing ShoppingCart Errors: ");
+		System.out.println("\nTesting ShoppingCart Errors: ");
 		testToShoppingCartErrors();
 	}	
 	
@@ -126,6 +126,68 @@ public class CentralControllerTest {
 		
 		input.put("Method", "viewAll");
 		response = testCentralController.handleRequest(input, testContext);		
+		System.out.println(response);
+		
+		System.out.println("\nTesting Catalog Review Methods:");
+		
+		input.put("Method", "getAllReviewsForItem");
+		input.put("Parameters", "a006");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "addReview");
+		input.put("Parameters", "{\"itemID\":\"a006\","
+				+ "\"userID\":\"u999\","
+				+ "\"name\":\"u999name\","
+				+ "\"surName\":\"u999surName\","
+				+ "\"comment\":\"u999comment\"}");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "getAllReviewsForItem");
+		input.put("Parameters", "a006");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "getReview");
+		input.put("Parameters", "{\"itemID\":\"a006\","
+				+ "\"userID\":\"u999\"}");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "editComment");
+		input.put("Parameters", "{\"itemID\":\"a006\","
+				+ "\"userID\":\"u999\","
+				+ "\"newComment\":\"u999newComment\"}");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "getAllReviewsForItem");
+		input.put("Parameters", "a006");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "getReview");
+		input.put("Parameters", "{\"itemID\":\"a006\","
+				+ "\"userID\":\"u999\"}");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "deleteReview");
+		input.put("Parameters", "{\"itemID\":\"a006\","
+				+ "\"userID\":\"u999\"}");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "getReview");
+		input.put("Parameters", "{\"itemID\":\"a006\","
+				+ "\"userID\":\"u999\"}");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "getAllReviewsForItem");
+		input.put("Parameters", "a006");
+		response = testCentralController.handleRequest(input, testContext);
 		System.out.println(response);
 	}
 	
