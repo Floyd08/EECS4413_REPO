@@ -175,12 +175,12 @@ public class DAOTest {
 		cart.AddToCart(i1);
 		cart.AddToCart(i2);
 		cart.AddToCart(i5);
-		pS.executeOrder(cart);
+		pS.executeOrder("000legitIP", cart);
 		
 		cart = new ShoppingCart(u2.getID());
 		cart.AddToCart(i5);
 		cart.AddToCart(i6);
-		pS.executeOrder(cart);
+		pS.executeOrder("000legitIP", cart);
 		
 		String o1 = pS.retrieveOrder("o104", "u035");
 		System.out.println("Order o104 " + o1);

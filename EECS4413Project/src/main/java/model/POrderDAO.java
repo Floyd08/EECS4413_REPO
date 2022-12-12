@@ -39,13 +39,17 @@ public class POrderDAO {
 		table.putItem(item);
 	}
 	
-	public void executeOrder/*66*/(ShoppingCart cart) {
+	public void executeOrder/*66*/(String ip, ShoppingCart cart) {
 		
 		String ID = generateOrderID();
 		User u = Model.getInstance().uDB.retrieve(cart.getOwner());
 		String userID = u.getID();
 		String address = u.getAddress();
 		ArrayList<POItem> items = new ArrayList<POItem>(cart.getCart().values());
+		Iterator<POItem> iterator = items.iterator();
+		while(iterator.hasNext()) {
+			cart.logItemSale(ip, iterator.next().getItemID());
+		}
 		
 		POrder p = new POrder(ID, userID, address, items);
 		insertOrder(p);
