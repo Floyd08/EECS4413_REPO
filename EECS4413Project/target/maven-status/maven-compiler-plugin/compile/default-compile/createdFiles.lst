@@ -1,15 +1,19 @@
+model\Model.class
 com\serverless\demo\function\GetArticle.class
 com\serverless\demo\model\ServerlessOutput.class
+controller\IdentityManager.class
 controller\IDTesting.class
 bean\POItem.class
 bean\ItemP.class
 bean\modelTesting.class
+controller\Catalog.class
 model\DAOTest.class
 controller\CentralControllerTest.class
 modelExceptions\ItemNotFoundException.class
 bean\VisitEvent.class
 controller\TestContext.class
 model\ReviewDAO.class
+controller\CentralController.class
 model\ItemDAO.class
 bean\User.class
 com\serverless\demo\function\PutArticle.class
@@ -17,6 +21,7 @@ com\serverless\demo\model\ServerlessInput$RequestContext.class
 modelExceptions\NoPasswordMatchException.class
 bean\POrder.class
 bean\ShoppingCart.class
+model\Handler.class
 com\serverless\demo\model\ServerlessInput.class
 bean\Address.class
 controller\TestLogger.class
