@@ -57,11 +57,53 @@ public class ViewEventDAO {
 		return null;
 	}
 	
+	public ArrayList<String> retrieveAll() {
+		
+		ArrayList<String> list = new ArrayList<String>();
+		
+		try {
+			ItemCollection<ScanOutcome> items = table.scan();
+			Iterator<Item> iterator = items.iterator();
+			while (iterator.hasNext()) {
+				list.add( iterator.next().toJSON() );
+			}
+			return list;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		return null;
+	}
+	
 	public ArrayList<String> retrieveEventByItem(String itemID) {
 		
 		ArrayList<String> list = new ArrayList<String>();
 		
 		ScanFilter sF = new ScanFilter("itemID").eq(itemID);
+		
+		try {
+			ItemCollection<ScanOutcome> items = table.scan(sF);
+			Iterator<Item> iterator = items.iterator();
+			while (iterator.hasNext()) {
+				list.add( iterator.next().toJSON() );
+			}
+			return list;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
+		
+		return null;
+	}
+	
+	public ArrayList<String> retrieveEventByType(String typeArg) {
+		
+		ArrayList<String> list = new ArrayList<String>();
+		
+		ScanFilter sF = new ScanFilter("type").eq(typeArg);
 		
 		try {
 			ItemCollection<ScanOutcome> items = table.scan(sF);
