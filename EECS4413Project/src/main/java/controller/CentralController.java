@@ -27,7 +27,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 
 	@Override
 	public String handleRequest(Map<String, String> event, Context context) {
-		//Event handler has other prototypes, so if this one isn't right you can totally change it
+		//Event handler has other prototypes, so if this one isn\"t right you can totally change it
 		//More here: https://docs.aws.amazon.com/lambda/latest/dg/java-handler.html
 		
 		String eventService = event.get("Service");
@@ -71,6 +71,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 		
 		else if (eventMethod.equals("viewAll")) {
 			String catalogResponse = Catalog.viewAll(dataModel).toString();
+			//catalogResponse = jsonListBracketReplace(catalogResponse);
 			response = "{\"statusCode\": " + 200 + ", " + 
 					"\"body\": \"" + catalogResponse + "\"}";
 		}
@@ -82,6 +83,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 			}
 			else {
 				String catalogResponse = Catalog.viewByType(dataModel, eventParameters).toString();
+				//catalogResponse = jsonListBracketReplace(catalogResponse);
 				response = "{\"statusCode\": " + 200 + ", " + 
 						"\"body\": \"" + catalogResponse + "\"}";
 			}
@@ -94,6 +96,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 			}
 			else {
 				String catalogResponse = Catalog.viewByBrand(dataModel, eventParameters).toString();
+				//catalogResponse = jsonListBracketReplace(catalogResponse);
 				response = "{\"statusCode\": " + 200 + ", " + 
 						"\"body\": \"" + catalogResponse + "\"}";
 			}
@@ -255,8 +258,10 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 						"\"body\": \"Error: Parameters missing.\"}";
 			}
 			else {
+				String catalogResponse = Catalog.getAllReviewsForItem(dataModel, eventParameters).toString();
+				//catalogResponse = jsonListBracketReplace(catalogResponse);
 				response = "{\"statusCode\": " + 200 + ", " + 
-						"\"body\": \"" + Catalog.getAllReviewsForItem(dataModel, eventParameters) + "\"}";
+						"\"body\": \"" + catalogResponse + "\"}";
 			}
 		}
 		
@@ -291,6 +296,10 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 			response = "{\"statusCode\": " + 404 + ", " + 
 					"\"body\": \"Error: Method not found.\"}"; 
 		}
+		
+		response = response.replaceAll("\"", "\"");
+		response = response.replaceAll("\"\\[", "\\[");
+		response = response.replaceAll("\\]\"", "\\]");
 		
 		return response;
 	}
@@ -331,7 +340,6 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					response = IdentityManager.logIn(id, pass);
 					response = response.replace("message", "body");
 					response = response.replace("status", "statusCode");
-					response = response.replaceAll("\"", "\"");
 				} catch (Exception e) {
 					
 					e.printStackTrace();
@@ -350,7 +358,6 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 				response = IdentityManager.logOut(eventParameters);
 				response = response.replace("message", "body");
 				response = response.replace("status", "statusCode");
-				response = response.replaceAll("\"", "\"");
 			}
 		}
 		
@@ -387,7 +394,6 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					
 					response = response.replace("message", "body");
 					response = response.replace("status", "statusCode");
-					response = response.replaceAll("\"", "\"");
 				} catch (Exception e) {
 					
 					response = "{\"statusCode\": " + 400 + ", " + 
@@ -406,6 +412,10 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 			response = "{\"statusCode\": " + 404 + ", " + 
 					"\"body\": \"Error: Method not found.\"}"; 
 		}
+		
+		response = response.replaceAll("\"", "\"");
+		response = response.replaceAll("\"\\[", "\\[");
+		response = response.replaceAll("\\]\"", "\\]");
 		
 		return response;
 	}
@@ -552,7 +562,18 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					"\"body\": \"Error: Method not found.\"}"; 
 		}
 		
+		response = response.replaceAll("\"", "\"");
+		response = response.replaceAll("\"\\[", "\\[");
+		response = response.replaceAll("\\]\"", "\\]");
+		
 		return response;
 	}
 	
+	private String jsonListBracketReplace(String str) {
+		String result;
+		result = str.replaceAll("\\{", "'\\{");
+		result = result.replaceAll("\\}", "\\}'");
+		
+		return result;
+	}
 }
