@@ -54,17 +54,10 @@ import modelExceptions.ItemNotFoundException;
  */
 public class ItemDAO {
 
-	AmazonDynamoDB ds;
-	DynamoDB ddb;
 	Table table;
 	
-	public ItemDAO() {
+	public ItemDAO(DynamoDB ddb) {
 		
-		//TO CONNECT TO DYNAMO LOCAL: comment out the line ds = ... and uncomment the other line
-		AWSStaticCredentialsProvider credentials = new AWSStaticCredentialsProvider(new BasicAWSCredentials("AKIAVKWM63KXGTCZ7VRE","LL8uQAja9sK3oPkSCEZzQvUjBpLEQTtugN0h9F+1"));
-		ds = AmazonDynamoDBClientBuilder.standard().withRegion(Regions.US_EAST_2).withCredentials(credentials).build();
-		//ds = AmazonDynamoDBClientBuilder.standard().withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration("http://localhost:8000", "us-east-2")).build();
-		ddb = new DynamoDB(ds);
 		table = ddb.getTable("items");
 	}
 	
@@ -304,6 +297,9 @@ public class ItemDAO {
 		
 		return names;		
 	}
+
+
+
 }
 
 

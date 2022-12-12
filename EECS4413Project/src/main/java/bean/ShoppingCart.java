@@ -66,6 +66,18 @@ public class ShoppingCart implements Comparable<ShoppingCart> {
 			this.getCart().put(i.getID(), p);
 	}
 	
+	public void logItemView(String ip, String itemID) {
+		
+		String date = java.time.LocalDateTime.now().toString();
+		Model.getInstance().vDB.insertEvent(ip, date, itemID, "View");
+	}
+	
+	public void logItemSale(String ip, String itemID) {
+		
+		String date = java.time.LocalDateTime.now().toString();
+		Model.getInstance().vDB.insertEvent(ip, date, itemID, "View");
+	}
+	
 	public void removeFromCart(String Json) {
 		
 		this.removeFromCart(ItemP.fromJSON(Json));

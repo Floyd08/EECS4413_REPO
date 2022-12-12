@@ -51,6 +51,7 @@ public final class IdentityManager{
 				return res;
 			}
 			dataModel.makeActive(id);
+			CartController.initializeCart(id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -71,6 +72,7 @@ public final class IdentityManager{
 					+ "  \"message\": \"User does not exist.\"\r\n}";
 		}
 		dataModel.makeInActive(id);
+		dataModel.carts.remove(id);
 		return res;
 	}
 	
@@ -108,6 +110,18 @@ public final class IdentityManager{
 		}
 		
 		return res;
+	}
+	
+	public static void updateAddress(String id, String street, String postalCode) {
+		
+		Model dataModel = Model.getInstance();
+		try {
+			dataModel.uDB.updateAddress(id, street, postalCode);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	
