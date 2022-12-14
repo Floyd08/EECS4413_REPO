@@ -48,6 +48,12 @@ public class ShoppingCart implements Comparable<ShoppingCart> {
 		return gS.toJson(cart);
 	}
 	
+	public static ShoppingCart cartFromJSON(String Json) {
+		
+		Gson gS = new Gson();
+		return gS.fromJson(Json, ShoppingCart.class);
+	}
+	
 	public void AddToCart(String Json) {
 		
 		this.AddToCart(ItemP.fromJSON(Json));
@@ -120,7 +126,7 @@ public class ShoppingCart implements Comparable<ShoppingCart> {
 	@Override 
 	public String toString() {
 		
-		return String.format("owner:%s cart:%s", owner, cart.toString());
+		return String.format("(owner:%s cart:%s", owner, cart.toString());
 	}
 	
 	@Override 
