@@ -433,13 +433,13 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 		
 		else if (eventMethod.equals("newShoppingCart")) {
 			if (eventParameters == null) {
-				shoppingCart = new ShoppingCart();
+				CartController.initializeCart("-1");
 				
 				response = "{\"statusCode\": " + 200 + ", " + 
-						"\"body\": \"A new Shopping Cart has been created.\"}";
+						"\"body\": \"A new Guest Shopping Cart has been created.\"}";
 			}
 			else {
-				shoppingCart = new ShoppingCart(eventParameters);
+				CartController.initializeCart(eventParameters);
 				
 				response = "{\"statusCode\": " + 200 + ", " + 
 						"\"body\": \"A new Shopping Cart has been created and " + eventParameters + " has been set as the owner.\"}";
@@ -464,8 +464,29 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 		}
 		
 		else if (eventMethod.equals("getCart")) {
-			response = "{\"statusCode\": " + 200 + ", " + 
-					"\"body\": \"" + shoppingCart.cartToJSON() + "\"}";
+			if (eventParameters == null) {
+				String userID = "-1";
+				response = "{\"statusCode\": " + 200 + ", " + 
+						"\"body\": \"" + CartController.getCart(userID) + "\"}";
+			}
+			else {
+				String userID = eventParameters;
+				response = "{\"statusCode\": " + 200 + ", " + 
+						"\"body\": \"" + CartController.getCart(userID) + "\"}";
+			}
+		}
+		
+		else if (eventMethod.equals("getCartAsJson")) {
+			if (eventParameters == null) {
+				String userID = "-1";
+				response = "{\"statusCode\": " + 200 + ", " + 
+						"\"body\": \"" + CartController.getCartAsJson(userID) + "\"}";
+			}
+			else {
+				String userID = eventParameters;
+				response = "{\"statusCode\": " + 200 + ", " + 
+						"\"body\": \"" + CartController.getCartAsJson(userID) + "\"}";
+			}
 		}
 		
 		else if (eventMethod.equals("setCart")) {
@@ -477,11 +498,22 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 				response = "{\"statusCode\": " + 400 + ", " + 
 						"\"body\": \"Error: Parameters missing.\"}";
 			}
-			else {
-				ItemP itemToAdd = ItemP.fromJSON(eventParameters);
-				shoppingCart.AddToCart(itemToAdd);
-				response = "{\"statusCode\": " + 200 + ", " + 
-						"\"body\": \"" + itemToAdd.getName() + " has been added to the shopping cart.\"}";
+			else {				
+				JSONParser parser = new JSONParser();
+				try {
+					JSONObject jsonEventParameters = (JSONObject) parser.parse(eventParameters);
+					String ip = jsonEventParameters.get("ip").toString();
+					String itemToAdd = jsonEventParameters.get("Item").toString();
+					String userID = jsonEventParameters.get("userID").toString();
+					CartController.addtoCart(ip, userID, itemToAdd);
+					response = "{\"statusCode\": " + 200 + ", " + 
+							"\"body\": \"" + ItemP.fromJSON(itemToAdd).getName() + " has been added to the shopping cart.\"}";
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+					response = "{\"statusCode\": " + 400 + ", " + 
+							"\"body\": \"Error: Parameters incorrect. {\"ip\":\"...\", \"Item\":\"...\", \"userID\":\"...\"}";
+				}
 			}
 		}
 		
@@ -490,24 +522,21 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 				response = "{\"statusCode\": " + 400 + ", " + 
 						"\"body\": \"Error: Parameters missing.\"}";
 			}
-			else {
-				ItemP itemToRemove = ItemP.fromJSON(eventParameters);
-				shoppingCart.removeFromCart(itemToRemove);
-				response = "{\"statusCode\": " + 200 + ", " + 
-						"\"body\": \"" + itemToRemove.getName() + " has been removed from the shopping cart.\"}";
-			}
-		}
-		
-		else if (eventMethod.equals("removeFromCart")) {
-			if (eventParameters == null) {
-				response = "{\"statusCode\": " + 400 + ", " + 
-						"\"body\": \"Error: Parameters missing.\"}";
-			}
-			else {
-				ItemP itemToRemove = ItemP.fromJSON(eventParameters);
-				shoppingCart.removeFromCart(itemToRemove);
-				response = "{\"statusCode\": " + 200 + ", " + 
-						"\"body\": \"" + itemToRemove.getName() + " has been removed from the shopping cart.\"}";
+			else {				
+				JSONParser parser = new JSONParser();
+				try {
+					JSONObject jsonEventParameters = (JSONObject) parser.parse(eventParameters);
+					String userID = jsonEventParameters.get("userID").toString();
+					String itemToRemove = jsonEventParameters.get("Item").toString();
+					CartController.removeFromCart(userID, itemToRemove);
+					response = "{\"statusCode\": " + 200 + ", " + 
+							"\"body\": \"" + ItemP.fromJSON(itemToRemove).getName() + " has been removed from the shopping cart.\"}";
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+					response = "{\"statusCode\": " + 400 + ", " + 
+							"\"body\": \"Error: Parameters incorrect. {\"userID\":\"...\", \"Item\":\"...\"}";
+				}
 			}
 		}
 		
@@ -520,16 +549,17 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 				JSONParser parser = new JSONParser();
 				try {
 					JSONObject jsonEventParameters = (JSONObject) parser.parse(eventParameters);
-					ItemP itemToUpdate = ItemP.fromJSON(jsonEventParameters.get("Item").toString());
-					int newQuantity = Integer.parseInt(jsonEventParameters.get("Quantity").toString());
-					shoppingCart.updateCartQuant(itemToUpdate, newQuantity);
+					String userID = jsonEventParameters.get("userID").toString();
+					String itemToUpdate = jsonEventParameters.get("Item").toString();
+					int newQuantity = Integer.parseInt(jsonEventParameters.get("newQuantity").toString());
+					CartController.updateCartQuant(userID, itemToUpdate, newQuantity);
 					response = "{\"statusCode\": " + 200 + ", " + 
-							"\"body\": \"" + itemToUpdate.getName() + " has been updated to " + newQuantity + ".\"}";
+							"\"body\": \"" + ItemP.fromJSON(itemToUpdate).getName() + " has been updated to " + newQuantity + ".\"}";
 				} catch (Exception e) {
 					
 					e.printStackTrace();
 					response = "{\"statusCode\": " + 400 + ", " + 
-							"\"body\": \"Error: Parameters incorrect. {\"Item\":\"...\", \"Quantity\":\"...\"}";
+							"\"body\": \"Error: Parameters incorrect. {\"userID\":\"...\", \"Item\":\"...\", \"newQuantity\":\"...\"}";
 				}
 			}
 		}
@@ -539,10 +569,20 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 				response = "{\"statusCode\": " + 400 + ", " + 
 						"\"body\": \"Error: Parameters missing.\"}";
 			}
-			else {
-				ItemP itemToCount = ItemP.fromJSON(eventParameters);
-				response = "{\"statusCode\": " + 200 + ", " + 
-						"\"body\": \"" + shoppingCart.getQuantity(itemToCount) + "\"}";
+			else {				
+				JSONParser parser = new JSONParser();
+				try {
+					JSONObject jsonEventParameters = (JSONObject) parser.parse(eventParameters);
+					String userID = jsonEventParameters.get("userID").toString();
+					String itemToCount = jsonEventParameters.get("Item").toString();
+					response = "{\"statusCode\": " + 200 + ", " + 
+							"\"body\": \"" + CartController.getQuantity(userID, itemToCount) + "\"}";
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+					response = "{\"statusCode\": " + 400 + ", " + 
+							"\"body\": \"Error: Parameters incorrect. {\"userID\":\"...\", \"Item\":\"...\"}";
+				}
 			}
 		}
 		
@@ -554,6 +594,29 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 			else {
 				response = "{\"statusCode\": " + 200 + ", " + 
 						"\"body\": \"" + shoppingCart.isEmpty() + "\"}";
+			}
+		}
+		
+		else if (eventMethod.equals("checkOut")) {
+			if (eventParameters == null) {
+				response = "{\"statusCode\": " + 400 + ", " + 
+						"\"body\": \"Error: Parameters missing.\"}";
+			}
+			else {				
+				JSONParser parser = new JSONParser();
+				try {
+					JSONObject jsonEventParameters = (JSONObject) parser.parse(eventParameters);
+					String ip = jsonEventParameters.get("ip").toString();
+					String userID = jsonEventParameters.get("userID").toString();
+					CartController.checkOut(ip, userID);
+					response = "{\"statusCode\": " + 200 + ", " + 
+							"\"body\": \"" + userID + "'s Shopping Cart has been checked out.\"}";
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+					response = "{\"statusCode\": " + 400 + ", " + 
+							"\"body\": \"Error: Parameters incorrect. {\"ip\":\"...\", \"userID\":\"...\"}";
+				}
 			}
 		}
 		

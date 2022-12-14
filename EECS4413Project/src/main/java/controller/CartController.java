@@ -50,10 +50,6 @@ public class CartController {
 		Model.getInstance().pDB.executeOrder(ip, c);
 		Model.getInstance().carts.put(userID, new ShoppingCart(userID));
 	}
-	
-	
-	
-	
 }
 
 
