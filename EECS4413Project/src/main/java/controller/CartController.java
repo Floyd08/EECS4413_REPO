@@ -50,6 +50,35 @@ public class CartController {
 		Model.getInstance().pDB.executeOrder(ip, c);
 		Model.getInstance().carts.put(userID, new ShoppingCart(userID));
 	}
+	
+	public static boolean isCartEmpty(String userID) {
+		
+		return Model.getInstance().carts.get(userID).isEmpty();
+	}
+	
+	public static String cartAsJSON(String userID) {
+		
+		return Model.getInstance().carts.get(userID).cartToJSON();
+	}
+	
+	public static ShoppingCart cartFromJSON(String Json) {
+		
+		return ShoppingCart.cartFromJSON(Json);
+	}
+	
+	public static String getOwnerID(ShoppingCart cart) {
+		
+		return cart.getOwner();
+	}
+	
+	public static void transferCart(String oldOwner, String newOwner) {
+		
+		ShoppingCart c = Model.getInstance().carts.get(oldOwner);
+		Model.getInstance().carts.remove(oldOwner);
+		Model.getInstance().carts.put(newOwner, c);
+	}
+	
+	
 }
 
 
