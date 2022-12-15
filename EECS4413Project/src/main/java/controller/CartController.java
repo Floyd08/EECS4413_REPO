@@ -76,9 +76,8 @@ public class CartController {
 		ShoppingCart c = Model.getInstance().carts.get(oldOwner);
 		Model.getInstance().carts.remove(oldOwner);
 		Model.getInstance().carts.put(newOwner, c);
+		c.setOwner(newOwner);
 	}
-	
-	
 }
 
 

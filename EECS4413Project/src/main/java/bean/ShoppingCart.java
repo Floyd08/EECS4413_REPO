@@ -126,7 +126,7 @@ public class ShoppingCart implements Comparable<ShoppingCart> {
 	@Override 
 	public String toString() {
 		
-		return String.format("(owner:%s cart:%s", owner, cart.toString());
+		return String.format("owner:%s cart:%s", owner, cart.toString());
 	}
 	
 	@Override 

@@ -318,20 +318,27 @@ public class CentralControllerTest {
 		String response = testCentralController.handleRequest(input, testContext);		
 		System.out.println(response);
 		
-		input.put("Method", "getOwner");
+		input.put("Method", "getOwnerID");
 		response = testCentralController.handleRequest(input, testContext);		
 		System.out.println(response);
 		
-		input.put("Method", "setOwner");
-		input.put("Parameters", "u999");
+		input.put("Method", "transferCart");
+		input.put("Parameters", "{"
+				+ "\"oldOwner\":\"-1\","
+				+ "\"newOwner\":\"u999\"}");
 		response = testCentralController.handleRequest(input, testContext);		
 		System.out.println(response);
 		
-		input.put("Method", "getOwner");
+		input.put("Method", "getOwnerID");
 		response = testCentralController.handleRequest(input, testContext);		
 		System.out.println(response);
 		
 		input.put("Method", "getCart");
+		response = testCentralController.handleRequest(input, testContext);		
+		System.out.println(response);
+		
+		input.put("Method", "getCart");
+		input.put("Parameters", "-1");
 		response = testCentralController.handleRequest(input, testContext);		
 		System.out.println(response);
 		
@@ -375,38 +382,45 @@ public class CentralControllerTest {
 		System.out.println(response);
 		
 		input.put("Method", "getCart");
+		input.put("Parameters", "u999");
 		response = testCentralController.handleRequest(input, testContext);		
 		System.out.println(response);
 		
 		input.put("Method", "getQuantity");
-		input.put("Parameters", "{\""
-				+ "quantity\":\"100\","
+		input.put("Parameters", "{\"userID\":\"u999\","
+				+ "\"Item\":{"
+				+ "\"userID\":\"u999\","
+				+ "\"quantity\":\"100\","
 				+ "\"price\":\"100.00\","
 				+ "\"name\":\"testItem\","
 				+ "\"description\":\"This is a test item\","
 				+ "\"ID\":\"t001\","
 				+ "\"type\":\"food\","
-				+ "\"brand\":\"burnbrae\"}");
+				+ "\"brand\":\"burnbrae\"}}");
 		response = testCentralController.handleRequest(input, testContext);
 		System.out.println(response);
 		
 		input.put("Method", "removeFromCart");
-		input.put("Parameters", "{\""
-				+ "quantity\":\"100\","
+		input.put("Parameters", "{\"userID\":\"u999\","
+				+ "\"Item\":{"
+				+ "\"userID\":\"u999\","
+				+ "\"quantity\":\"100\","
 				+ "\"price\":\"100.00\","
 				+ "\"name\":\"testItem\","
 				+ "\"description\":\"This is a test item\","
 				+ "\"ID\":\"t001\","
 				+ "\"type\":\"food\","
-				+ "\"brand\":\"burnbrae\"}");
+				+ "\"brand\":\"burnbrae\"}}");
 		response = testCentralController.handleRequest(input, testContext);
 		System.out.println(response);
 		
 		input.put("Method", "getCart");
+		input.put("Parameters", "u999");
 		response = testCentralController.handleRequest(input, testContext);		
 		System.out.println(response);
 		
 		input.put("Method", "isEmpty");
+		input.put("Parameters", "u999");
 		response = testCentralController.handleRequest(input, testContext);		
 		System.out.println(response);
 	}

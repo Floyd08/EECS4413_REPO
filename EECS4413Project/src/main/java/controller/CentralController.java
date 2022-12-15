@@ -22,7 +22,6 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 	ShoppingCart shoppingCart;
 
 	public CentralController() {
-		shoppingCart = new ShoppingCart();
 	}
 
 	@Override
@@ -434,32 +433,45 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 		else if (eventMethod.equals("newShoppingCart")) {
 			if (eventParameters == null) {
 				CartController.initializeCart("-1");
+				shoppingCart = CartController.getCart("-1");
 				
 				response = "{\"statusCode\": " + 200 + ", " + 
 						"\"body\": \"A new Guest Shopping Cart has been created.\"}";
 			}
 			else {
 				CartController.initializeCart(eventParameters);
+				shoppingCart = CartController.getCart(eventParameters);
 				
 				response = "{\"statusCode\": " + 200 + ", " + 
 						"\"body\": \"A new Shopping Cart has been created and " + eventParameters + " has been set as the owner.\"}";
 			}
 		}
 		
-		else if (eventMethod.equals("getOwner")) {
+		else if (eventMethod.equals("getOwnerID")) {
 			response = "{\"statusCode\": " + 200 + ", " + 
-					"\"body\": \"" + shoppingCart.getOwner() + "\"}";
+					"\"body\": \"" + CartController.getOwnerID(shoppingCart) + "\"}";
 		}
 		
-		else if (eventMethod.equals("setOwner")) {
+		else if (eventMethod.equals("transferCart")) {
 			if (eventParameters == null) {
 				response = "{\"statusCode\": " + 400 + ", " + 
 						"\"body\": \"Error: Parameters missing.\"}";
 			}
-			else {
-				shoppingCart.setOwner(eventParameters);
-				response = "{\"statusCode\": " + 200 + ", " + 
-						"\"body\": \"" + eventParameters + " has been set as the owner of the shopping cart.\"}";
+			else {				
+				JSONParser parser = new JSONParser();
+				try {
+					JSONObject jsonEventParameters = (JSONObject) parser.parse(eventParameters);
+					String oldOwner = jsonEventParameters.get("oldOwner").toString();
+					String newOwner = jsonEventParameters.get("newOwner").toString();
+					CartController.transferCart(oldOwner, newOwner);
+					response = "{\"statusCode\": " + 200 + ", " + 
+							"\"body\": \"The Shopping Cart belonging to " + oldOwner + " has been transfered to " + newOwner + ".\"}";
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+					response = "{\"statusCode\": " + 400 + ", " + 
+							"\"body\": \"Error: Parameters incorrect. {\"oldOwner\":\"...\", \"newOwner\":\"...\"}";
+				}
 			}
 		}
 		
