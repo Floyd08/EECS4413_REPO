@@ -31,7 +31,7 @@ public class CartController {
 	
 	public static void removeFromCart(String userID, String Json) {
 		
-		Model.getInstance().carts.get(Json).removeFromCart(Json);
+		Model.getInstance().carts.get(userID).removeFromCart(Json);
 	}
 	
 	public static void updateCartQuant(String userID, String Json, int newQuant) {
