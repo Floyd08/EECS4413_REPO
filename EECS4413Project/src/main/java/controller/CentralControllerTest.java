@@ -284,6 +284,14 @@ public class CentralControllerTest {
 		input.put("Method", "activeUsers");
 		response = testCentralController.handleRequest(input, testContext);
 		System.out.println(response);
+		
+		input.put("Method", "updateAddress");
+		input.put("Parameters", "{\""
+				+ "id\":\"u999\","
+				+ "\"street\":\"u999street2\","
+				+ "\"postalCode\":\"u999postalCode2\"}");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
 	}
 	
 	public static void testToIdentityManagerErrors() {
