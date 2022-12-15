@@ -49,6 +49,10 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 			callResponse = toShoppingCart(event);
 		}
 		
+		else if (eventService.equals("Analytics")) {
+			callResponse = toAnalytics(event);
+		}
+		
 		else {
 			callResponse = "{\"statusCode\": " + 404 + ", " + 
 					"\"body\": \"Error: Service not found.\"}";
@@ -680,12 +684,44 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					"\"body\": \"Error: Method not specified.\"}";
 		}
 		
+		else if (eventMethod == "getAllEvents") {
+			response = "{\"statusCode\": " + 200 + ", " + 
+					"\"body\": \"" + Analytics.getAllEvents() + "\"}";
+		}
 		
+		else if (eventMethod == "getAllSales") {
+			response = "{\"statusCode\": " + 200 + ", " + 
+					"\"body\": \"" + Analytics.getAllSales() + "\"}";	
+		}
+				
+		else if (eventMethod == "getAllViews") {
+			response = "{\"statusCode\": " + 200 + ", " + 
+					"\"body\": \"" + Analytics.getAllViews() + "\"}";
+		}
+				
+		else if (eventMethod == "getAllOrders") {
+			response = "{\"statusCode\": " + 200 + ", " + 
+					"\"body\": \"" + Analytics.getAllOrders() + "\"}";
+		}
+				
+		else if (eventMethod == "getOrdersByUser") {
+			if (eventParameters == null) {
+				response = "{\"statusCode\": " + 400 + ", " + 
+						"\"body\": \"Error: Parameters missing.\"}";
+			}
+			else {
+				response = "{\"statusCode\": " + 200 + ", " + 
+						"\"body\": \"" + Analytics.getOrdersByUser(eventParameters) + "\"}";
+			}
+		}
 		
 		else {
 			response = "{\"statusCode\": " + 404 + ", " + 
 					"\"body\": \"Error: Method not found.\"}"; 
 		}
+		
+		response = response.replaceAll("\"\\[", "\\[");
+		response = response.replaceAll("\\]\"", "\\]");
 		
 		return response;
 	}

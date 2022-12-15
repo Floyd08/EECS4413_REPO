@@ -39,6 +39,12 @@ public class CentralControllerTest {
 		
 		System.out.println("\nTesting ShoppingCart Errors: ");
 		testToShoppingCartErrors();
+		
+		System.out.println("\nTesting Analytics Methods: ");
+		testToAnalyticsComplete();
+		
+		System.out.println("\nTesting Analytics Errors: ");
+		testToAnalyticsErrors();
 	}	
 	
 	public static void testMissingService() {
@@ -449,6 +455,56 @@ public class CentralControllerTest {
 		System.out.println(response);
 		
 		input.put("Method", "addToCart");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+	}
+	
+public static void testToAnalyticsComplete() {
+		
+		CentralController testCentralController = new CentralController();
+		
+		Map<String, String> input = new HashMap<String, String>();
+		Context testContext = new TestContext();
+		
+		input.put("Service", "Analytics");
+		input.put("Method", "getAllEvents");
+		String response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "getAllSales");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "getAllViews");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "getAllOrders");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "getOrdersByUser");
+		input.put("Parameters", "u035");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+	}
+	
+	public static void testToAnalyticsErrors() {
+		
+		CentralController testCentralController = new CentralController();
+		
+		Map<String, String> input = new HashMap<String, String>();
+		Context testContext = new TestContext();
+		
+		input.put("Service", "Analytics");
+		String response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "???");
+		response = testCentralController.handleRequest(input, testContext);
+		System.out.println(response);
+		
+		input.put("Method", "getOrdersByUser");
 		response = testCentralController.handleRequest(input, testContext);
 		System.out.println(response);
 	}
