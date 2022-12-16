@@ -200,7 +200,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 							+ "\"userID\":\"...\","
 							+ "\"name\":\"...\","
 							+ "\"surName\":\"...\","
-							+ "\"comment\":\"...\"}";
+							+ "\"comment\":\"...\"}}";
 				}
 			}
 		}
@@ -226,7 +226,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					
 					e.printStackTrace();
 					response = "{\"statusCode\": " + 400 + ", " + 
-							"\"body\": \"Error: Parameters incorrect. {\"itemID\":\"...\", \"userID\":\"...\"}";
+							"\"body\": \"Error: Parameters incorrect. {\"itemID\":\"...\", \"userID\":\"...\"}}";
 				}
 			}
 		}
@@ -250,7 +250,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					
 					e.printStackTrace();
 					response = "{\"statusCode\": " + 400 + ", " + 
-							"\"body\": \"Error: Parameters incorrect. {\"itemID\":\"...\", \"userID\":\"...\"}";
+							"\"body\": \"Error: Parameters incorrect. {\"itemID\":\"...\", \"userID\":\"...\"}}";
 				}
 			}
 		}
@@ -290,7 +290,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					
 					e.printStackTrace();
 					response = "{\"statusCode\": " + 400 + ", " + 
-							"\"body\": \"Error: Parameters incorrect. {\"itemID\":\"...\", \"userID\":\"...\", \"newComment\":\"...\"}";
+							"\"body\": \"Error: Parameters incorrect. {\"itemID\":\"...\", \"userID\":\"...\", \"newComment\":\"...\"}}";
 				}
 			}
 		}
@@ -347,7 +347,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					
 					e.printStackTrace();
 					response = "{\"statusCode\": " + 400 + ", " + 
-							"\"body\": \"Error: Parameters incorrect. {\"id\":\"...\", \"pass\":\"...\"}";
+							"\"body\": \"Error: Parameters incorrect. {\"id\":\"...\", \"pass\":\"...\"}}";
 				}
 			}
 		}
@@ -401,7 +401,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					
 					response = "{\"statusCode\": " + 400 + ", " + 
 							"\"body\": \"Error: Parameters incorrect. {\"id\":\"...\" (optional), "
-							+ "\"pass\":\"...\", \"nomi\":\"...\", \"aile\":\"...\", \"postal\":\"...\", \"address\":\"...\"}";
+							+ "\"pass\":\"...\", \"nomi\":\"...\", \"aile\":\"...\", \"postal\":\"...\", \"address\":\"...\"}}";
 				}
 			}
 		}
@@ -431,7 +431,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					
 					e.printStackTrace();
 					response = "{\"statusCode\": " + 400 + ", " + 
-							"\"body\": \"Error: Parameters incorrect. {\"id\":\"...\", \"street\":\"...\", \"postalCode\":\"...\"}";
+							"\"body\": \"Error: Parameters incorrect. {\"id\":\"...\", \"street\":\"...\", \"postalCode\":\"...\"}}";
 				}
 			}
 		}
@@ -499,7 +499,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					
 					e.printStackTrace();
 					response = "{\"statusCode\": " + 400 + ", " + 
-							"\"body\": \"Error: Parameters incorrect. {\"oldOwner\":\"...\", \"newOwner\":\"...\"}";
+							"\"body\": \"Error: Parameters incorrect. {\"oldOwner\":\"...\", \"newOwner\":\"...\"}}";
 				}
 			}
 		}
@@ -553,7 +553,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					
 					e.printStackTrace();
 					response = "{\"statusCode\": " + 400 + ", " + 
-							"\"body\": \"Error: Parameters incorrect. {\"ip\":\"...\", \"Item\":\"...\", \"userID\":\"...\"}";
+							"\"body\": \"Error: Parameters incorrect. {\"ip\":\"...\", \"Item\":\"...\", \"userID\":\"...\"}}";
 				}
 			}
 		}
@@ -576,7 +576,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					
 					e.printStackTrace();
 					response = "{\"statusCode\": " + 400 + ", " + 
-							"\"body\": \"Error: Parameters incorrect. {\"userID\":\"...\", \"Item\":\"...\"}";
+							"\"body\": \"Error: Parameters incorrect. {\"userID\":\"...\", \"Item\":\"...\"}}";
 				}
 			}
 		}
@@ -600,7 +600,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					
 					e.printStackTrace();
 					response = "{\"statusCode\": " + 400 + ", " + 
-							"\"body\": \"Error: Parameters incorrect. {\"userID\":\"...\", \"Item\":\"...\", \"newQuantity\":\"...\"}";
+							"\"body\": \"Error: Parameters incorrect. {\"userID\":\"...\", \"Item\":\"...\", \"newQuantity\":\"...\"}}";
 				}
 			}
 		}
@@ -622,7 +622,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					
 					e.printStackTrace();
 					response = "{\"statusCode\": " + 400 + ", " + 
-							"\"body\": \"Error: Parameters incorrect. {\"userID\":\"...\", \"Item\":\"...\"}";
+							"\"body\": \"Error: Parameters incorrect. {\"userID\":\"...\", \"Item\":\"...\"}}";
 				}
 			}
 		}
@@ -656,7 +656,7 @@ public class CentralController implements RequestHandler<Map<String, String>, St
 					
 					e.printStackTrace();
 					response = "{\"statusCode\": " + 400 + ", " + 
-							"\"body\": \"Error: Parameters incorrect. {\"ip\":\"...\", \"userID\":\"...\"}";
+							"\"body\": \"Error: Parameters incorrect. {\"ip\":\"...\", \"userID\":\"...\"}}";
 				}
 			}
 		}
