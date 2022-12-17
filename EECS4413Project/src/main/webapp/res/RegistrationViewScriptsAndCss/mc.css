@@ -1,0 +1,212 @@
+/****
+REGISTRATION VIEW STYLING (This includes Login.html and Register.html)
+ ****/
+
+@charset "ISO-8859-1";
+
+*{
+	color: black;	
+	margin: 0;
+	padding: 0;
+	background-color: white;
+}
+body {
+	font-size: 13px;
+    line-height: 1.61538;
+    font-family:  "azo-sans-web", helvetica, arial, sans-serif;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+a {
+	text-decoration: none;
+}
+hr{
+	border:0;
+	height: 1px;
+	background-color: black;
+}
+header {
+	display: block;
+  	justify-content: space-evenly;
+  	background: none;
+    text-align: center;
+    padding: 0;
+    
+}
+li{
+	display: inline;
+	align-items: center;
+	list-style: none;
+}
+.menu {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid: auto / auto 50% auto;
+	padding-top: 10px;
+	font-size: 16px;
+	font-family: "Verdana", Helvetica, Arial, sans-serif;
+}
+.menu .top-left-links{
+	display: grid;
+	grid-template-columns: auto auto auto;
+	text-align: left;
+}
+.menu .top-right-links{
+	display: grid;
+	grid-template-columns: auto auto auto;
+	text-align: right;
+}
+.logo {
+	padding-bottom: 20px;
+    font-size: 65px;
+    font-family: "Rubik", "Cocogoose Narrow Trial Li", "Asap", "GT Pressura", "Block Berthold", "Cabin";
+}
+.footer-seperation{
+	margin-top: 65px;
+}
+footer{
+	padding-top: 20px;
+	padding-bottom: 20px;
+	font-size: 15px;
+    font-family: "Rubik", "Cocogoose Narrow Trial Li", "Asap", "GT Pressura", "Block Berthold", "Cabin";
+	display: grid;
+	grid-template-columns: 30% auto 30%;
+}
+footer .left-phrase{
+	text-align: left;
+}
+footer ul{
+	text-align: center;
+	padding-left: 20%;
+	padding-right: 20%;
+}
+footer .right-phrase{
+	text-align: right;
+}
+footer ul li{
+		padding-left: 2%;
+		padding-right: 2%;
+}
+.login-body{
+	overflow-y: scroll;
+}
+.login{
+	font-family: "Asap", "GT Pressura", sans-serif;
+	text-align: center;
+	padding-top: 150px;
+	padding-bottom: 365px;
+	padding-left: 30%;
+	padding-right: 30%;
+}
+.login .login-title {
+	font-size: 20px;
+}
+.login .new-customer p, 
+.login .new-customer a{
+	display: inline;
+}
+.login .registered-customer p{
+	font-family: "kw-medium",helvetica,arial,sans-serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+	font-size: 20px;
+	padding-top: 45px;
+}
+.login-form{
+	padding-left: 20%;
+    padding-right: 20%;
+	text-align: left;
+}
+.login-form label,
+.login-form input{
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	font-size: 18px;
+}
+.login-form input{
+	border: 1px solid #ccc;
+	height: 30px;
+}
+.login-form label{
+	padding-top: 15px;
+	padding-bottom: 5px;
+}
+.login-form button{
+	display: block;
+	width: 60%;
+	height: 30px;
+	margin-top: 20px;
+	margin-left: 20%;
+    margin-right: 20%;
+    box-sizing: border-box;
+    font-size: 18px;
+    border: 1px solid grey;
+}
+.login-form button:hover {
+	transition-duration: 0.4s;
+	background-color: black;
+	color: white;
+	cursor: pointer;
+}
+
+
+.register-body{
+	overflow-y: scroll;
+}
+.register{
+	font-family: "Asap", "GT Pressura", sans-serif;
+	text-align: center;
+	padding-top: 100px;
+	padding-bottom: 365px;
+	padding-left: 30%;
+	padding-right: 30%;
+}
+
+.register .register-customer p{
+	font-family: "kw-medium",helvetica,arial,sans-serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+	font-size: 20px;
+	padding-top: 45px;
+}
+.register-form{
+	padding-left: 20%;
+    padding-right: 20%;
+	text-align: left;
+}
+.register-form label,
+.register-form input{
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	font-size: 18px;
+}
+.register-form input{
+	border: 1px solid #ccc;
+	height: 30px;
+}
+.register-form label{
+	padding-top: 15px;
+	padding-bottom: 5px;
+}
+.register-form button{
+	display: block;
+	width: 60%;
+	height: 30px;
+	margin-top: 20px;
+	margin-left: 20%;
+    margin-right: 20%;
+    box-sizing: border-box;
+    font-size: 18px;
+    border: 1px solid grey;
+}
+.register-form button:hover {
+	transition-duration: 0.4s;
+	background-color: black;
+	color: white;
+	cursor: pointer;
+}
+

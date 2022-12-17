@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="StyleSheet" href="res/CatalogViewScriptsAndCss/mc.css" type="text/css" title="cse4413" media="screen, print"/>
+<script type="text/javascript" src="res/CatalogViewScriptsAndCss/myJS.js"></script>
+<script>
+function ShowRefineOptions() {
+	if(document.getElementById("refine-form").style.display == "none"){
+		document.getElementById("refine-form").style.display = "grid";
+		document.getElementById("refine-form").style.gridTemplateColumns = "auto auto auto";		
+		document.getElementById("refine-form").style.paddingLeft = "20%";
+		document.getElementById("refine-form").style.paddingRight = "20%";
+	}
+	else{
+		document.getElementById("refine-form").style.display = "none";
+	}
+}
+</script>
+
+<title>Catalog</title>
+<link rel="icon" href="res/icons/icon-1.ico" type="image/x-icon">
+</head>
+
+<body onload = "LoadCatalogPage();">
+	<header class = "basic" id= "catalog-header">
+		<div class="menu">
+			<ul class="top-left-links">	
+				<li><a href="About_us.html" class="under">ABOUT US</a></li>
+				<li><a href="Contact_us.html" class="under">CONTACT US</a></li>
+				<li><a href="Administration-Analytics_page.html" class="under">ADMIN</a></li>
+			</ul>
+			<ul></ul>
+			<ul class="top-right-links">
+				<li><a href="Login.html" class="under" id="login-link">LOGIN</a></li>
+				<li><a href="Register.html" class="under" id="register-link">REGISTER</a></li>
+				<li><a href="#" class="under">VIEW CART</a></li>
+			</ul>
+		</div>
+		<div class="logo"><a href="Catalog.html">&prop;lpha&szlig;et Store</a></div>
+	</header>
+	<HR>
+	<section class= "refine">
+		<button id="refine-dropdown-button" type= "button" onclick="ShowRefineOptions()">Refine Search</button>
+		<form id="refine-form" style = "display:none">
+			<div class="see-all">
+				<input type="checkbox" id="see-all-checkbox" name="see-all" value="see-all">
+				<label for="see-all-checkbox">See All</label>
+			</div>
+			<div class= "refine-by-brand">
+				<p>By Brand</p>
+				<input type="checkbox" id="brand#1" name="brand" value="Apple">
+				<label for="brand#1">Apple</label><br>
+				<input type="checkbox" id="brand#2" name="brand" value="Artika">
+				<label for="brand#2">Artika</label><br>
+				<input type="checkbox" id="brand#3" name="brand" value="Balderson">
+				<label for="brand#3">Balderson</label><br>			
+				<input type="checkbox" id="brand#2" name="brand" value="BookCo">
+				<label for="brand#2">BookCo</label><br>
+				<input type="checkbox" id="brand#3" name="brand" value="Burnbrae">
+				<label for="brand#3">Burnbrae</label><br>		
+				<input type="checkbox" id="brand#1" name="brand" value="Campbell Soup Company">
+				<label for="brand#1">Campbell Soup Company</label><br>
+				<input type="checkbox" id="brand#2" name="brand" value="Ghost Ship Games">
+				<label for="brand#2">Ghost Ship Games</label><br>
+				<input type="checkbox" id="brand#3" name="brand" value="Lenovo">
+				<label for="brand#3">Lenovo</label><br>			
+				<input type="checkbox" id="brand#2" name="brand" value="Levi">
+				<label for="brand#2">Levi</label><br>
+				<input type="checkbox" id="brand#3" name="brand" value="Ludeon Studio">
+				<label for="brand#3">Ludeon Studio</label><br>		
+				<input type="checkbox" id="brand#1" name="brand" value="Nintendo">
+				<label for="brand#1">Nintendo</label><br>
+				<input type="checkbox" id="brand#2" name="brand" value="Penguin Random House">
+				<label for="brand#2">Penguin Random House</label><br>
+				<input type="checkbox" id="brand#3" name="brand" value="Pilot">
+				<label for="brand#3">Pilot</label><br>			
+				<input type="checkbox" id="brand#2" name="brand" value="Square Enix">
+				<label for="brand#2">Square Enix</label><br>
+				<input type="checkbox" id="brand#3" name="brand" value="TowelCo">
+				<label for="brand#3">TowelCo</label><br>		
+			</div>	
+			<div class= "refine-by-type">
+				<p>By Type</p>
+				<input type="checkbox" id="type#1" name="type" value="Book">
+				<label for="type#1">Book</label><br>
+				<input type="checkbox" id="type#2" name="type" value="Clothing">
+				<label for="type#2">Clothing</label><br>
+				<input type="checkbox" id="type#3" name="type" value="Electronics">
+				<label for="type#3">Electronics</label><br>			
+				<input type="checkbox" id="type#1" name="type" value="Food">
+				<label for="type#1">Food</label><br>
+				<input type="checkbox" id="type#2" name="type" value="Houseware">
+				<label for="type#2">Houseware</label><br>
+				<input type="checkbox" id="type#3" name="type" value="Video Game">
+				<label for="type#3">Video Game</label><br>			
+			</div>
+			<br>
+		  	<button id= "refine-submit-button" type="submit" onclick="LoadCatalogPage(); return false;">Refine</button>
+	  	</form>
+	</section>
+	<section class= "products">
+	</section>
+	<HR class="footer-seperation">
+	<footer>
+		<P class="left-phrase">Designed By Team &prop;lpha&szlig;et</P>
+		<ul class="footer-links">	
+			<li><a href="About_us.html" class="under">ABOUT US</a></li>
+			<li><a href="Contact_us.html" class="under">CONTACT US</a></li>
+		</ul>
+		<p class="right-phrase"> Thanks For Visiting Our Site</p>
+	</footer>
+</body>
+
+</html>

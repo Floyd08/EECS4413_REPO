@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="StyleSheet" href="res/RegistrationViewScriptsAndCss/mc.css" type="text/css" title="cse4413" media="screen, print"/>
+<script type="text/javascript" src="res/RegistrationViewScriptsAndCss/myJS.js"></script>
+<title>Login</title>
+<link rel="icon" href="res/icons/icon-1.ico" type="image/x-icon">
+</head>
+
+<body class="login-body">
+	<header class = "basic" id= "login-header">
+		<div class="menu">
+			<ul class="top-left-links">	
+				<li><a href="About_us.html" class="under">ABOUT US</a></li>
+				<li><a href="Contact_us.html" class="under">CONTACT US</a></li>
+				<li><a href="Administration-Analytics_page.html" class="under">ADMIN</a></li>
+			</ul>
+			<ul></ul>
+			<ul class="top-right-links">
+				<li><a href="Login.html" class="under">LOGIN</a></li>
+				<li><a href="Register.html" class="under">REGISTER</a></li>
+				<li><a href="#" class="under">VIEW CART</a></li>
+			</ul>
+		</div>
+		<div class="logo"><a href="Catalog.html">&prop;lpha&szlig;et Store</a></div>
+	</header>
+	<HR>
+	<section class= "login">
+		<div class="login-title"><p>LOG IN<span id="test"></span></p></div>
+		<div class= "new-customer">
+			<p>New customer?</p>
+			<a href="Register.html">Create an account here</a>
+		</div>
+		<div class= "registered-customer">
+			<p>REGISTERED CUSTOMERS</p>
+			<form class="login-form">
+					<label for="email">User Name<BR /> <span id="email-error" ></span></label>
+					<input type="text" id="email" name="email" value=""/>
+					<label for="password">Password<BR /> <span id=password-error ></span></label>
+					<input type="password" id="password" name="password" value=""/>
+			  		<button type="button" value="loginAPI" id="login-button" name="loginAPI" onclick="CallLoginAPI(document.getElementById('email').value,document.getElementById('password').value)">Login</button>
+			</form>
+		</div>
+	</section>
+	<HR>
+	<footer>
+		<P class="left-phrase">Designed By Team &prop;lpha&szlig;et</P>
+		<ul class="footer-links">	
+			<li><a href="About_us.html" class="under">ABOUT US</a></li>
+			<li><a href="Contact_us.html" class="under">CONTACT US</a></li>
+		</ul>
+		<p class="right-phrase"> Thanks For Visiting Our Site</p>
+	</footer>
+</body>
+</html>
