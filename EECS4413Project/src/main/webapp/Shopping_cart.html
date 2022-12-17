@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="StyleSheet" href="res/mc.css" type="text/css" title="cse4413" media="screen, print"/>
+<script type="text/javascript" src="res/cart.js"></script>
+<title>Cart</title>
+<link rel="icon" href="res/icons/icon-1.ico" type="image/x-icon">
+</head>
+
+<body onload = "LoadPage();">
+	<header class = "basic" id= "catalog-header">
+		<div class="menu">
+			<ul class="top-left-links">	
+				<li><a href="About_us.html" class="under">ABOUT US</a></li>
+				<li><a href="Contact_us.html" class="under">CONTACT US</a></li>
+				<li><a href="https://alphabet-store.ca/admin/" class="under">ADMIN</a></li>
+			</ul>
+			<ul></ul>
+			<ul class="top-right-links">
+				<li><a href="Login.html" class="under">LOGIN</a></li>
+				<li><a href="Register.html" class="under">REGISTER</a></li>
+				<li><a href="https://alphabet-store.ca/cart/" class="under">VIEW CART</a></li>
+			</ul>
+		</div>
+		<div class="logo"><a href="Catalog.html">&prop;lpha&szlig;et Store</a></div>
+	</header>
+	<HR>
+	<ul class= "items" id="dynamic-list">
+        <li id="primer">
+            <a href= "Product.html" class= "s-product-name">Product name for p1_2</a>
+			<div class= "s-product-description-price">C$ 20</div>
+            <div>
+                <button id="add" onclick="add();" class="s-product-name">+</button>
+				<span id = "times"></span>
+                <button id="subtract" onclick="subtract();" class="s-product-name">-</button>
+                <button id="remove" onclick="remove();" class="s-product-name">Delete</button>
+            </div>
+        </li>
+	</ul>
+    <HR>
+        <div class="total">
+            <p id="totalvalue"></p>
+            <button onclick="">Checkout</button>
+        </div>
+	<HR class="footer-seperation">
+	<footer>
+		<P class="left-phrase">Designed By Team &prop;lpha&szlig;et</P>
+		<ul class="footer-links">	
+			<li><a href="About_us.html" class="under">ABOUT US</a></li>
+			<li><a href="Contact_us.html" class="under">CONTACT US</a></li>
+		</ul>
+		<p class="right-phrase"> Thanks For Visiting Our Site</p>
+	</footer>
+</body>
+
+</html>
