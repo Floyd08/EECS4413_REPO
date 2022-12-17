@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="StyleSheet" href="res/RegistrationViewScriptsAndCss/mc.css" type="text/css" title="cse4413" media="screen, print"/>
+<script type="text/javascript" src="res/RegistrationViewScriptsAndCss/myJS.js"></script>
+<title>register</title>
+<link rel="icon" href="res/icons/icon-1.ico" type="image/x-icon">
+</head>
+
+<body class="register-body">
+	<header class = "basic" id= "register-header">
+		<div class="menu">
+			<ul class="top-left-links">	
+				<li><a href="About_us.html" class="under">ABOUT US</a></li>
+				<li><a href="Contact_us.html" class="under">CONTACT US</a></li>
+				<li><a href="Administration-Analytics_page.html" class="under">ADMIN</a></li>
+			</ul>
+			<ul></ul>
+			<ul class="top-right-links">
+				<li><a href="login.html" class="under">LOGIN</a></li>
+				<li><a href="Register.html" class="under">REGISTER</a></li>
+				<li><a href="#" class="under">VIEW CART</a></li>
+			</ul>
+		</div>
+		<div class="logo"><a href="Catalog.html">&prop;lpha&szlig;et Store</a></div>
+	</header>
+	<HR>
+	<section class= "register">
+		<div class= "register-customer">
+			<p>REGISTER</p>
+			<form class="register-form">
+					<label for="username">User Name<BR /> <span id="email-error" ></span></label>
+					<input type="text" id="username" name="username" value=""/>
+					<label for="password">Password<BR /> <span id=password-error ></span></label>
+					<input type="password" id="password" name="password" value=""/>
+					<label for="password_confirm">Confirm Password<BR /> <span id=password-error ></span></label>
+					<input type="password" id="password_confirm" name="password_confirm" value=""/>
+					<label for="fname">First Name<BR /> <span id="email-error" ></span></label>
+					<input type="text" id="fname" name="fname" value=""/>
+					<label for="sname">Surame<BR /> <span id=password-error ></span></label>
+					<input type="text" id="sname" name="sname" value=""/>
+					<label for="pcode">Postal code<BR /> <span id="email-error" ></span></label>
+					<input type="text" id="pcode" name="pcode" value=""/>
+					<label for="addrs">Address<BR /> <span id=password-error ></span></label>
+					<input type="text" id="addrs" name="addrs" value=""/>					
+			  		<button type="button" value="registerAPI" id="register-button" name="registerAPI" onclick="CallRegisterAPI(document.getElementById('username').value, document.getElementById('password').value), CallRegisterAPI(document.getElementById('fname').value, document.getElementById('sname').value), CallRegisterAPI(document.getElementById('pcode').value, document.getElementById('addrs').value)">Register</button>
+			</form>
+		</div>
+	</section>
+	<HR>
+	<footer>
+		<P class="left-phrase">Designed By Team &prop;lpha&szlig;et</P>
+		<ul class="footer-links">	
+			<li><a href="About_us.html" class="under">ABOUT US</a></li>
+			<li><a href="Contact_us.html" class="under">CONTACT US</a></li>
+		</ul>
+		<p class="right-phrase"> Thanks For Visiting Our Site</p>
+	</footer>
+</body>
+</html>

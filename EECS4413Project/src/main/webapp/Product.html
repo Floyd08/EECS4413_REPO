@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="StyleSheet" href="res/CatalogViewScriptsAndCss/mc.css" type="text/css" title="cse4413" media="screen, print"/>
+<script type="text/javascript" src="res/CatalogViewScriptsAndCss/myJS.js"></script>
+<title>Product</title>
+<link rel="icon" href="res/icons/icon-1.ico" type="image/x-icon">
+</head>
+
+<body class="product-body" onload= "LoadProductPage();">
+	<header class= "basic" id= "product-header">
+		<div class="menu">
+			<ul class= "top-left-links">	
+				<li><a href= "About_us.html" class= "under">ABOUT US</a></li>
+				<li><a href= "Contact_us.html" class= "under">CONTACT US</a></li>
+				<li><a href= "Administration-Analytics_page.html" class= "under">ADMIN</a></li>
+			</ul>
+			<ul></ul>
+			<ul class= "top-right-links">
+				<li><a href= "Login.html" class= "under" id="login-link">LOGIN</a></li>
+				<li><a href= "Register.html" class= "under" id="register-link">REGISTER</a></li>
+				<li><a href= "#" class= "under">VIEW CART</a></li>
+			</ul>
+		</div>
+		<div class="logo"><a href="Catalog.html">&prop;lpha&szlig;et Store</a></div>
+	</header>
+	<HR>
+	<section class= "product">
+	</section>
+	<section class= "review-section">
+		<div class="review-section-title">CUSTOMER REVIEWS</div>					
+		<div class="reviews">
+			<!--BOX-1-------------->
+	        <div class="testimonial-box">
+	        	<form class="testimonial-form">
+					<label for="fullname">Full name: </label>
+					<input type="text" id="fullname" name="fullname"/>
+					<label for="review">Review:</label>
+					<input type="text" id="review" name="review"/>
+			  		<button type="button" value="reviewAPI" id="review-button" name="reviewAPI" onclick="CallReviewAPI(document.getElementById('fullname').value, document.getElementById('review').value)">Submit review</button>
+				</form>            
+	        </div>
+	            <!--BOX-2-------------->
+	        <div class="testimonial-box">
+	        	<div class="user-name-2">
+	            	<strong>Touseeq Ijaz</strong>
+	            	<span>@touseeqijazweb</span>
+				</div>
+				<div class="client-comment-2">
+	        		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
+				</div>                
+	        </div>
+	            <!--BOX-3-------------->
+	        <div class="testimonial-box">
+	        	<div class="user-name-3">
+	            	<strong>Touseeq Ijaz</strong>
+	            	<span>@touseeqijazweb</span>
+				</div>
+				<div class="client-comment-3">
+	        		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
+				</div>                
+	        </div>
+	        <!--BOX-4-------------->
+	        <div class="testimonial-box">
+	        	<div class="user-name-4">
+	            	<strong>Touseeq Ijaz</strong>
+	            	<span>@touseeqijazweb</span>
+				</div>
+				<div class="client-comment-4">
+	        		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
+				</div>                
+	        </div>
+        </div>
+	</section>
+	<HR>
+	<footer>
+		<P class= "left-phrase">Designed By Team &prop;lpha&szlig;et</P>
+		<ul class= "footer-links">	
+			<li><a href= "About_us.html" class= "under">ABOUT US</a></li>
+			<li><a href= "Contact_us.html" class= "under">CONTACT US</a></li>
+		</ul>
+		<p class= "right-phrase"> Thanks For Visiting Our Site</p>
+	</footer>
+</body>
+</html>

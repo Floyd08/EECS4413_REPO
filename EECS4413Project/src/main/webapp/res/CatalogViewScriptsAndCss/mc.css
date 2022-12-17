@@ -1,0 +1,318 @@
+@charset "ISO-8859-1";
+
+*{
+	color: black;	
+	margin: 0;
+	padding: 0;
+	background-color: white;
+}
+body {
+	font-size: 13px;
+    line-height: 1.61538;
+    font-family:  "azo-sans-web", helvetica, arial, sans-serif;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+a {
+	text-decoration: none;
+}
+hr{
+	border:0;
+	height: 1px;
+	background-color: black;
+}
+header {
+	display: block;
+  	justify-content: space-evenly;
+  	background: none;
+    text-align: center;
+    padding: 0;
+    
+}
+li{
+	display: inline;
+	align-items: center;
+	list-style: none;
+}
+.menu {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid: auto / auto 50% auto;
+	padding-top: 10px;
+	font-size: 16px;
+	font-family: "Verdana", Helvetica, Arial, sans-serif;
+}
+.menu .top-left-links{
+	display: grid;
+	grid-template-columns: auto auto auto;
+	text-align: left;
+}
+.menu .top-right-links{
+	display: grid;
+	grid-template-columns: auto auto auto;
+	text-align: right;
+}
+.logo {
+	padding-bottom: 20px;
+    font-size: 65px;
+    font-family: "Rubik", "Cocogoose Narrow Trial Li", "Asap", "GT Pressura", "Block Berthold", "Cabin";
+}
+.refine{
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.refine #refine-dropdown-button{
+	font-family: "Asap", "GT Pressura", sans-serif;
+	text-transform: uppercase;
+	height: 30px;
+	font-size: 15px;
+	cursor: pointer;
+	border: none;
+	padding-left: 2%;
+}
+/*
+.refine #see-all-button{
+	width: 50px;
+	height: 20px;
+	font-size: 13px;
+	border: none;
+	cursor: pointer;	
+}*/
+
+.refine #refine-form #refine-submit-button{
+	height: 25px;
+	font-size: 10px;
+	border: 2px double black;
+	text-align: center;
+	margin-top: 10px;
+}
+.refine #refine-form #refine-submit-button:hover {
+	transition-duration: 0.4s;
+	background-color: black;
+	color: white;
+	cursor: pointer;
+}
+.products{
+	display: grid;
+	gap: 50px 70px;
+	grid-template-columns: auto auto auto;
+	padding-top: 20px;
+	padding-bottom: 25px;
+	text-align: center;
+}
+.s-product-description {
+	padding-top: 10px;	
+}
+.product-footer-page-navigation{
+	padding-top: 20px;
+	font-size: 15px;
+	display: inline;
+    text-align: center;
+}
+.product-footer-page-navigation li{
+	padding-left: 0.6%;
+	padding-right: 0.6%;
+}
+.footer-seperation{
+	margin-top: 65px;
+}
+footer{
+	padding-top: 20px;
+	padding-bottom: 20px;
+	font-size: 15px;
+    font-family: "Rubik", "Cocogoose Narrow Trial Li", "Asap", "GT Pressura", "Block Berthold", "Cabin";
+	display: grid;
+	grid-template-columns: 30% auto 30%;
+}
+footer .left-phrase{
+	text-align: left;
+}
+footer ul{
+	text-align: center;
+	padding-left: 20%;
+	padding-right: 20%;
+}
+footer .right-phrase{
+	text-align: right;
+}
+footer ul li{
+		padding-left: 2%;
+		padding-right: 2%;
+}
+.login-body,
+.product-body{
+	overflow-y: scroll;
+}
+.login{
+	font-family: "Asap", "GT Pressura", sans-serif;
+	text-align: center;
+	padding-top: 150px;
+	padding-bottom: 365px;
+	padding-left: 30%;
+	padding-right: 30%;
+}
+.login .login-title {
+	font-size: 20px;
+}
+.login .new-customer p, 
+.login .new-customer a{
+	display: inline;
+}
+.login .registered-customer p{
+	font-family: "kw-medium",helvetica,arial,sans-serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+	font-size: 20px;
+	padding-top: 45px;
+}
+.login-form{
+	padding-left: 20%;
+    padding-right: 20%;
+	text-align: left;
+}
+.login-form label,
+.login-form input{
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	font-size: 18px;
+}
+.login-form input{
+	border: 1px solid #ccc;
+	height: 30px;
+}
+.login-form label{
+	padding-top: 15px;
+	padding-bottom: 5px;
+}
+.login-form button{
+	display: block;
+	width: 60%;
+	height: 30px;
+	margin-top: 20px;
+	margin-left: 20%;
+    margin-right: 20%;
+    box-sizing: border-box;
+    font-size: 18px;
+    border: 1px solid grey;
+}
+.login-form button:hover {
+	transition-duration: 0.4s;
+	background-color: black;
+	color: white;
+	cursor: pointer;
+}
+
+.product-body .product{
+	display: grid;
+	grid-template-columns: 60% auto;
+	padding-top: 100px;
+	padding-bottom: 200px;
+	text-align: center;
+}
+.product-body .product .product-description{
+	padding-top: 50px;
+}
+.product-body .product .product-description .s-product-name{
+	font-family: "kw-medium",helvetica,arial,sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+	font-size: 18px;
+}
+.product-body .product .product-description .s-product-price{
+	padding-top: 10px;
+	font-size: 15px;
+}
+.product-body .product-action{
+	display: grid;
+	grid-template-columns: 40% 40%;
+	gap: 20%;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	padding-left: 5%;
+	padding-right: 5%;
+	text-align: center;
+	align-items: center;
+}
+.product-body .product-action button{
+	height: 30px;
+	font-size: 18px;
+}
+.product-body .product-action button:hover {
+	transition-duration: 0.4s;
+	background-color: black;
+	color: white;
+	cursor: pointer;
+}
+.product-body .product-action label{
+	font-size: 20px;
+	padding-top: 25px;
+}
+.product-body .product-action select{
+	height: 30px;
+	font-size: 18px;
+	margin-top: 25px;
+}
+.product-body .product-info .s-product-description-description{
+	text-align: left;
+	font-size: 15px;
+	margin-top: 15px;
+}
+
+.product-body .product-info .s-product-description-title {
+	font-family: "kw-medium",helvetica,arial,sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+	text-align: left;
+	font-weight: bold;
+	display: grid;
+    grid-template-columns: 60% auto;
+}
+
+.review-section{
+	padding-bottom: 50px;
+	font-size: 15px;
+}
+.review-section .reviews{
+	padding: 10px;
+	border: 4px solid black;
+}
+.review-section .testimonial-box{
+	padding-bottom: 10px;
+	
+}
+.review-section .review-section-title{
+	padding-left: 10px;
+	padding-bottom: 10px;
+	font-family: arial,sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+	font-size: 18px;
+
+}
+.review-section .reviews .testimonial-box .testimonial-form input{
+	height: 18px;
+	font-size: 15px;
+	padding-left: 5px;	
+}
+.review-section .reviews .testimonial-box .testimonial-form button{
+	height: 22px;
+    font-size: 15px;
+    padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 2px;
+}
+.review-section .reviews .testimonial-box .testimonial-form button:hover {
+	transition-duration: 0.4s;
+	background-color: black;
+	color: white;
+	cursor: pointer;
+}
+
+
